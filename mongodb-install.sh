@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RockMongo_URL = 'https://github.com/iwind/rockmongo/archive/1.1.7.tar.gz'
+RockMongo_URL='https://github.com/iwind/rockmongo/archive/1.1.7.tar.gz'
 
 echo 'start install mongodb...'
 
@@ -10,7 +10,7 @@ echo 'start install apache2...'
 
 apt-get install apache2 -y
 
-echo "ServerName: localhost:80" >> /etc/apache2/apache2.conf
+echo "ServerName localhost:80" >> /etc/apache2/apache2.conf
 
 /etc/init.d/apache2 restart
 
