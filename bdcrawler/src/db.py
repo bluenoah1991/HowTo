@@ -65,9 +65,9 @@ class db(object):
             common.log('add_song: song_id is null')
             return None
         if not song_name:
-            common.log('add_song: song_name is null')
+            common.log('add_song[%d]: song_name is null' % song_id)
         if not songlink:
-            common.log('add_song: songlink is null')
+            common.log('add_song[%d]: songlink is null' % song_id)
         post = {'song_id': song_id,
                 'song_name': song_name,
                 'lrclink': lrclink,
@@ -80,7 +80,7 @@ class db(object):
             song_db = self.__db[song_]
             song_db.insert(post)
         except Exception, e:
-            common.log(e)
+            common.log('add_song[%d]: %s' % (song_id, e))
        
     def del_artist(self, artist_id):
         if not artist_id:
