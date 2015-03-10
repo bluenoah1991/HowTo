@@ -16,5 +16,5 @@ def http_read(url):
         raw_content = handle.read()
         handle.close()
     except Exception, e:
-        log(e)
+        log('http_read[%s]: %s' % (url, e))
     return raw_content

@@ -12,15 +12,17 @@ import common, db
 
 def Start(db_, artist_list):
 
-    GetSongs_URL_Template_ = 'http://music.baidu.com/data/user/getsongs?start=%s&ting_uid=%s'
+    GetSongs_URL_Template_ = 'http://music.baidu.com/data/user/getsongs?start=%s&ting_uid=%s&order=hot'
     SongLink_URL_Template_ = 'http://play.baidu.com/data/music/songlink?songIds=%s'
     PRE_URL_ = 'http://play.baidu.com'
 
     Find_Song_Switch_ = False
     Artist_Id_ = ''
+    Order_ = 0
 
     def Find_Song_Link(tag, attrs):
         global Find_Song_Switch_
+        global Order_
         try:
             if tag == 'a':
                 for k, v in attrs:
@@ -30,6 +32,8 @@ def Start(db_, artist_list):
                             href_ = href_[:href_.find('/')]
                         #Song_List_.add(href_)
                         raw_content = common.http_read(SongLink_URL_Template_ % href_)
+                        if not raw_content:
+                            continue
                         raw_object = json.loads(raw_content)
                         songList = raw_object['data']['songList']
                         if len(songList) > 0:
@@ -41,7 +45,8 @@ def Start(db_, artist_list):
                             rate = song_['rate']
                             size = song_['size']
                             artist_id = Artist_Id_
-                            db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id)
+                            db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_)
+                            Order_ = Order_ + 1
                             print 'song %d has been saved.' % songId
                         Find_Song_Switch_ = True
         except Exception, e:
@@ -52,6 +57,7 @@ def Start(db_, artist_list):
     
     for k_ in artist_list:
         print 'start process artist %s ...' % k_
+        Order_ = 0
         s_ = 0
         Find_Song_Switch_ = True
         while(Find_Song_Switch_):
