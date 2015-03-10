@@ -81,7 +81,7 @@ class db(object):
             song_db = self.__db[song_]
             song_db.insert(post)
         except Exception, e:
-            common.log('add_song[%d]: %s' % (song_id, e))
+            common.log('add_song: ' + str(e))
        
     def del_artist(self, artist_id):
         if not artist_id:
@@ -116,40 +116,6 @@ class db(object):
             common.log('exist_artist_log: artist_id is null')
             return True
         return artist_id in self.__artist_log_map
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

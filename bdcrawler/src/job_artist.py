@@ -39,16 +39,17 @@ def Start(db_):
                     elif Category_List_Switch_:
                         Category_List_.add(PRE_URL_ + href_)
         except Exception, e:
-            common.log('Find_Artist_Link: ' + e)  
+            common.log('Find_Artist_Link: ' + str(e))  
     
     parser = HTMLParser()
     parser.handle_starttag = Find_Artist_Link
 
     raw_content = common.http_read(URL_)
+    
     try:
         parser.feed(raw_content)
     except Exception, e:
-        common.log('HTMLParser.feed: ' + e)
+        common.log('HTMLParser.feed: ' + str(e))
     print '"' + URL_ + '" has been processed.'
     
     Category_List_Switch_ = False
@@ -58,7 +59,7 @@ def Start(db_):
         try:
             parser.feed(raw_content)
         except Exception, e:
-            common.log('HTMLParser.feed: ' + e)
+            common.log('HTMLParser.feed: ' + str(e))
         print '"' + l_ + '" has been processed.'
     
     parser.close()

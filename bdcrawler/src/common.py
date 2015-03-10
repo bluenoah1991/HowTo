@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-import time, urllib
+import time, urllib, inspect
+
+import pdb
 
 def log(obj):
     fname = time.strftime('%Y%m%d.log', time.localtime())
@@ -15,6 +17,7 @@ def http_read(url):
         handle = urllib.urlopen(url)
         raw_content = handle.read()
         handle.close()
+        return raw_content
     except Exception, e:
-        log('http_read[%s]: %s' % (url, e))
-    return raw_content
+        log('http_read: ' + str(e))
+        return None

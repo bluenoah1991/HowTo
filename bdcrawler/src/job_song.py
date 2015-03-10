@@ -16,13 +16,11 @@ def Start(db_, artist_list):
     SongLink_URL_Template_ = 'http://play.baidu.com/data/music/songlink?songIds=%s'
     PRE_URL_ = 'http://play.baidu.com'
 
-    Find_Song_Switch_ = False
+    Find_Song_Switch_ = [False]
     Artist_Id_ = ''
-    Order_ = 0
+    Order_ = [0]
 
     def Find_Song_Link(tag, attrs):
-        global Find_Song_Switch_
-        global Order_
         try:
             if tag == 'a':
                 for k, v in attrs:
@@ -45,43 +43,45 @@ def Start(db_, artist_list):
                             rate = song_['rate']
                             size = song_['size']
                             artist_id = Artist_Id_
-                            db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_)
-                            Order_ = Order_ + 1
+                            db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
+                            Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId
-                        Find_Song_Switch_ = True
+                        Find_Song_Switch_[0] = True
         except Exception, e:
-            common.log('Find_Song_Link: ' + e)
+            common.log('Find_Song_Link: ' + str(e))
     
     parser = HTMLParser()
     parser.handle_starttag = Find_Song_Link
     
     for k_ in artist_list:
         print 'start process artist %s ...' % k_
-        Order_ = 0
+        Order_[0] = 0
         s_ = 0
-        Find_Song_Switch_ = True
-        while(Find_Song_Switch_):
-            Find_Song_Switch_ = False
+        Find_Song_Switch_[0] = True
+        while(Find_Song_Switch_[0]):
+            Find_Song_Switch_[0] = False
             raw_content = common.http_read(GetSongs_URL_Template_ % (s_, k_))
             s_ = s_ + 25
+            if not raw_content:
+                continue
             try:
                 raw_object = json.loads(raw_content)
             except Exception, e:
-                common.log('json.loads: ' + e)
+                common.log('json.loads: ' + str(e))
             try:
                 raw_content = raw_object['data']['html']
             except Exception, e:
-                common.log('extract html from json object: ' + e)
+                common.log('extract html from json object: ' + str(e))
             try:
                 raw_content = raw_content.decode('unicode_escape')
             except Exception, e:
-                common.log('str.decode: ' + e) 
+                common.log('str.decode: ' + str(e)) 
             try:
                 Artist_Id_ = k_
                 parser.feed(raw_content)
                 db_.add_artist_log(k_)
             except Exception, e:
-                common.log('HTMLParser.feed: ' + e)
+                common.log('HTMLParser.feed: ' + str(e))
     
     return True    
 
