@@ -74,7 +74,7 @@ class db(object):
                 'songlink': songlink,
                 'rate': rate,
                 'size': size,
-                'artist_id': artist_id
+                'artist_id': artist_id,
                 'order': order}
         try:
             global song_
