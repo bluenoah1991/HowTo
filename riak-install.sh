@@ -3,7 +3,7 @@
 ERLANG_FILENAME=otp_src_R16B02-basho5.tar.gz
 ERLANG_RUNTIME_URL=http://s3.amazonaws.com/downloads.basho.com/erlang/otp_src_R16B02-basho5.tar.gz
 
-sudo apt-get install build-essential libncurses5-dev openssl libssl-dev fop xsltproc unixodbc-dev
+sudo apt-get install build-essential libncurses5-dev openssl libssl-dev fop xsltproc unixodbc-dev -y
 
 wget ${ERLANG_RUNTIME_URL} --output-document=/tmp/${ERLANG_FILENAME}
 cd /tmp
@@ -16,7 +16,7 @@ cd ${ExtractDir}
 
 echo "Erlang has been installed."
 
-sudo apt-get install build-essential libc6-dev-i386 git
+sudo apt-get install build-essential libc6-dev-i386 git -y
 
 RIAK_URL=http://s3.amazonaws.com/downloads.basho.com/riak/2.0/2.0.5/riak-2.0.5.tar.gz
 RIAK_FILENAME=riak-2.0.5.tar.gz
