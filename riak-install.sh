@@ -17,6 +17,7 @@ cd ${ExtractDir}
 echo "Erlang has been installed."
 
 sudo apt-get install build-essential libc6-dev-i386 git -y
+sudo apt-get install libpam0g-dev -y
 
 RIAK_URL=http://s3.amazonaws.com/downloads.basho.com/riak/2.0/2.0.5/riak-2.0.5.tar.gz
 RIAK_FILENAME=riak-2.0.5.tar.gz
