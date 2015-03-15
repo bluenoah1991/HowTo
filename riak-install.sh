@@ -9,7 +9,7 @@ wget ${ERLANG_RUNTIME_URL} --output-document=/tmp/${ERLANG_FILENAME}
 cd /tmp
 tar -xvf ${ERLANG_FILENAME}
 
-ExtractDir=${ERLANG_FILENAME%tar.gz*}
+ExtractDir=${ERLANG_FILENAME%.tar.gz*}
 cd ${ExtractDir}
 
 ./configure && make && sudo make install
@@ -28,7 +28,7 @@ wget ${RIAK_URL} --output-document=${RIAK_HOME}/${RIAK_FILENAME}
 cd ${RIAK_HOME}
 tar zxvf ${RIAK_FILENAME}
 
-ExtractDir=${RIAK_FILENAME%tar.gz*}
+ExtractDir=${RIAK_FILENAME%.tar.gz*}
 cd ${ExtractDir}
 make rel
 make all
