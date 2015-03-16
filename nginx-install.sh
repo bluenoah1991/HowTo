@@ -25,7 +25,7 @@ server {\n\
   }\n\
 }" /etc/nginx/nginx.conf
 
-if [ -f "/run/nginx.pid" ]; then
+if [ ! -f "/run/nginx.pid" ]; then
   /etc/init.d/nginx start
 else
   nginx -s reload
