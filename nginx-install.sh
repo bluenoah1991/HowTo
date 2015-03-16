@@ -13,17 +13,23 @@ read endip
 ln=`grep -n 'http {' /etc/nginx/nginx.conf | head -1 | cut -d : -f 1`
 
 sed -i "${ln}a \
-server {\
-  listen 80;\
-  server_name ${ipaddr};\
-  \
-  location / {\
-    limit_except GET {\
-      deny all;\
-    }\
-    proxy_pass http://${endip};\
-  }\
+server {\n\
+  listen 80;\n\
+  server_name ${ipaddr};\n\
+  \n\
+  location / {\n\
+    limit_except GET {\n\
+      deny all;\n\
+    }\n\
+    proxy_pass http://${endip};\n\
+  }\n\
 }" /etc/nginx/nginx.conf
+
+if [ -f "/run/nginx.pid" ]; then
+  /etc/init.d/nginx start
+else
+  nginx -s reload
+fi
 
 echo "success!"
 
