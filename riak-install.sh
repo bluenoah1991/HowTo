@@ -36,5 +36,27 @@ make all
 
 sudo mkdir ${RIAK_HOME}/local
 
-#sudo cp 
+sudo cp rel/riak ${RIAK_HOME}/local -rf
+cd ${RIAK_HOME}/local/riak
+
+bin/riak stop
+
+ipaddr=`/sbin/ifconfig eth0 | grep inet | head -1 | cut -d : -f 2 | cut -d " " -f 1`
+
+l1=`grep -n "listener.http.internal" etc/riak.conf | head -1 | cut -d : -f 1`
+l2=`grep -n "listener.protobuf.internal" etc/riak.conf | head -1 | cur -d : -f 1`
+l3=`grep -n "nodename" etc/riak.conf | head -1 | cur -d : -f 1`
+
+sed -i "${l1}c listener.http.internal = ${ipaddr}:8098" etc/riak.conf
+sed -i "${l2}c listener.protobuf.internal = ${ipaddr}:8087" etc/riak.conf
+sed -i "${l3}c nodename = riak@${ipaddr}" etc/riak.conf
+
+bin/riak-admin reip 'riak@127.0.0.1' "riak@${ipaddr}"
+
+bin/riak start
+
+
+
+
+
 
