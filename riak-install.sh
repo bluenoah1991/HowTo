@@ -41,6 +41,14 @@ cd ${RIAK_HOME}/local/riak
 
 bin/riak stop
 
+### about ulimit
+
+echo '* soft nofile 65536' >> /etc/security/limits.conf
+echo '* hard nofile 65536' >> /etc/security/limits.conf
+echo 'session required pam_limits.so' >> /etc/pam.d/common-session
+
+###
+
 ipaddr=`/sbin/ifconfig eth0 | grep inet | head -1 | cut -d : -f 2 | cut -d " " -f 1`
 
 echo "Your ip is ${ipaddr}"
