@@ -40,6 +40,8 @@ sed -i "${ln}c dir /var/redis/${PORT}" /etc/redis/${PORT}.conf
 
 update-rc.d redis_${PORT} defaults
 
+sed -i 's/^save/#&/' /etc/redis/${PORT}.conf
+
 /etc/init.d/redis_${PORT} start
 
 redis-cli ping
