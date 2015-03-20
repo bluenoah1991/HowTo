@@ -60,6 +60,14 @@ class db(object):
         except Exception, e:
             common.log(e)
 
+    def get_song_cursor(self):
+        try:
+            global song_
+            song_db = self.__db[song_]
+            return song_db.find()
+        except Exception, e:
+            common.log(e)
+
     def add_song(self, song_id, song_name, lrclink, songlink, rate, size, artist_id, order):
         if not song_id:
             common.log('add_song: song_id is null')
