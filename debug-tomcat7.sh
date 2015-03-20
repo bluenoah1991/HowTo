@@ -7,7 +7,7 @@ if [ $# > 0 ]; then
   rm /var/lib/tomcat7/webapps/${fileName%.war*}
   cp ${fileName} /var/lib/tomcat7/webapps/${fileName}
   /usr/share/tomcat7/bin/catalina.sh stop
-  /usr/share/tomcat7/bin/catalina/sh jpda start
+  /usr/share/tomcat7/bin/catalina.sh jpda start
 else
   echo "miss parameters"
 fi
