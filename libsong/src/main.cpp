@@ -1,3 +1,5 @@
+//g++ -g -o main main.cpp $(pkg-config --cflags --libs libmongoc-1.0)
+
 #include <bson.h>
 #include <mongoc.h>
 #include <stdio.h>
@@ -19,6 +21,7 @@ int main(int argc, char *argv[]){
   bson_t *query;
   char *str;
   char *name;
+  int order;
   mongoc_init();
   bson_error_t error;
   client = mongoc_client_new("mongodb://localhost:27017/");
@@ -31,6 +34,12 @@ int main(int argc, char *argv[]){
   map<string, int>::iterator it;
   while(mongoc_cursor_next(cursor, &doc)){
     bson_iter_init(&iter, doc);
+    if(bson_iter_find(&iter, "order")){
+      order = bson_iter_int32(&iter);
+      if(order > 200){
+        continue;
+      }
+    }
     if(bson_iter_find(&iter, "song_name")){
       name = (char*)bson_iter_utf8(&iter, NULL);
       if(name == NULL || strcmp(name, "") == 0){
