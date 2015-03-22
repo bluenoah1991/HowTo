@@ -9,14 +9,7 @@ import httplib
 from urlparse import urlparse
 import common, db
 
-h = '127.0.0.1:8098'
-
-if '-h' in sys.argv:
-    h_index = sys.argv.index('-h')
-    if h_index and h_index > 0 and len(sys.argv) > h_index + 1:
-        h = sys.argv[h_index + 1]
-
-RIAK_HOSTNAME = h
+RIAK_HOSTNAME = '192.168.20.67:8098'
 RIAK_URL_TEMPLATE = '/buckets/music/key/%s'
 
 db_ = db.db()

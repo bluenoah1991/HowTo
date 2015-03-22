@@ -9,10 +9,6 @@ conn.request("GET", URL_)
 res = conn.getresponse()
 
 body = res.read()
-print type(body)
-for b in body:
-  print type(b)
-  break
 
 f = open('777.mp3', 'w')
 f.write(body)
