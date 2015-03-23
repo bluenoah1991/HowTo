@@ -10,7 +10,7 @@ import os, time, math, pdb
 import db, job_artist, job_song
 
 #just once
-db_ = db.db()
+db_ = db.db('mongodb://192.168.20.66:27017/', 'local')
 
 rs = job_artist.Start(db_)
 
