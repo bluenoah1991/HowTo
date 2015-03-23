@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-artist_ = 'artist'
-song_ = 'song'
-artist_log_ = 'artist_log'
+artist_ = 'artist9'
+song_ = 'song9'
+artist_log_ = 'artist_log9'
 
 import common
 import pymongo

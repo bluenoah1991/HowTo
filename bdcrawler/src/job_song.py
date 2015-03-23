@@ -7,6 +7,8 @@ sys.setdefaultencoding('utf8')
 
 from HTMLParser import HTMLParser
 import urllib, json
+import httplib
+from urlparse import urlparse
 
 import common, db
 
@@ -19,6 +21,19 @@ def Start(db_, artist_list):
     Find_Song_Switch_ = [False]
     Artist_Id_ = ''
     Order_ = [0]
+
+    h = '127.0.0.1:8098'
+    if '-h' in sys.argv:
+        h_index = sys.argv.index('-h')
+        if h_index and h_index > 0 and len(sys.argv) > h_index + 1:
+            h = sys.argv[h_index + 1]
+
+    RIAK_HOSTNAME = h
+    RIAK_URL_TEMPLATE = '/buckets/music/keys/%s'
+
+    conn_pool = {}
+    conn_riak = httplib.HTTPConnection(RIAK_HOSTNAME)	
+
 
     def Find_Song_Link(tag, attrs):
         try:
@@ -44,6 +59,20 @@ def Start(db_, artist_list):
                             size = song_['size']
                             artist_id = Artist_Id_
                             db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
+                            if(songlink and songlink != ''):
+                                o = urlparse(songlink)
+                                conn = None
+                                if(o.hostname not in conn_pool):
+                                    conn = httplib.HTTPConnection(o.hostname)
+                                    conn_pool[o.hostname] = conn
+                                else:
+                                    conn = conn_pool[o.hostname]
+                                path = songlink[(songlink.find(o.hostname) + len(o.hostname)):]
+                                conn.request("GET", path)
+                                res = conn.getresponse()
+                                body = res.read()
+                                conn_riak.request("PUT", RIAK_URL_TEMPLATE % songId, body, {'Content-Type': 'audio/mpeg'})
+                                res = conn_riak.getresponse()
                             Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId
                         Find_Song_Switch_[0] = True

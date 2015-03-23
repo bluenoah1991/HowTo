@@ -17,7 +17,7 @@ if '-h' in sys.argv:
         h = sys.argv[h_index + 1]
 
 RIAK_HOSTNAME = h
-RIAK_URL_TEMPLATE = '/buckets/music/key/%s'
+RIAK_URL_TEMPLATE = '/buckets/music/keys/%s'
 
 db_ = db.db()
 
