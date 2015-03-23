@@ -21,19 +21,22 @@ def Start(db_, artist_list):
     Find_Song_Switch_ = [False]
     Artist_Id_ = ''
     Order_ = [0]
+    SongNameMap = {}
 
     h = '127.0.0.1:8098'
     if '-h' in sys.argv:
         h_index = sys.argv.index('-h')
         if h_index and h_index > 0 and len(sys.argv) > h_index + 1:
             h = sys.argv[h_index + 1]
+    
+    order = int(common.get_argv('-order', 25))
 
     RIAK_HOSTNAME = h
     RIAK_URL_TEMPLATE = '/buckets/music/keys/%s'
+    RIAK_LRC_URL_TEMPLATE = '/buckets/lrc/keys/%s'
 
-    conn_pool = {}
-    conn_riak = httplib.HTTPConnection(RIAK_HOSTNAME)	
-
+    dwn_music = common.Downloader(RIAK_HOSTNAME, RIAK_URL_TEMPLATE)
+    dwn_lrc = common.Downloader(RIAK_HOSTNAME, RIAK_LRC_URL_TEMPLATE)
 
     def Find_Song_Link(tag, attrs):
         try:
@@ -58,23 +61,15 @@ def Start(db_, artist_list):
                             rate = song_['rate']
                             size = song_['size']
                             artist_id = Artist_Id_
-                            db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
-                            if(songlink and songlink != ''):
-                                o = urlparse(songlink)
-                                conn = None
-                                if(o.hostname not in conn_pool):
-                                    conn = httplib.HTTPConnection(o.hostname)
-                                    conn_pool[o.hostname] = conn
-                                else:
-                                    conn = conn_pool[o.hostname]
-                                path = songlink[(songlink.find(o.hostname) + len(o.hostname)):]
-                                conn.request("GET", path)
-                                res = conn.getresponse()
-                                body = res.read()
-                                conn_riak.request("PUT", RIAK_URL_TEMPLATE % songId, body, {'Content-Type': 'audio/mpeg'})
-                                res = conn_riak.getresponse()
-                                res.read()
-                            Order_[0] = Order_[0] + 1
+                            if songName not in SongNameMap:
+                                SongNameMap[songName] = None
+                                if(order > Order_[0] and songlink and songlink != ''):#important
+                                    db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
+                                    dwn_music.transfer(songlink, songId, 'audio/mpeg')
+                                    if lrclink.endswith('.lrc'):
+                                        dwn_lrc.transfer(lrclink, songId, 'text/plain')
+                                    Order_[0] = Order_[0] + 1
+                            #Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId
                         Find_Song_Switch_[0] = True
         except Exception, e:
@@ -86,6 +81,7 @@ def Start(db_, artist_list):
     for k_ in artist_list:
         print 'start process artist %s ...' % k_
         Order_[0] = 0
+        SongNameMap = {}
         s_ = 0
         Find_Song_Switch_[0] = True
         while(Find_Song_Switch_[0]):
