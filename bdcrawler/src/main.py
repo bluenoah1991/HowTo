@@ -19,6 +19,11 @@ count = len(artist_list)
 
 print 'Artist : ' + str(count)
 
+if '--debug' in sys.argv:
+    job_song.Start(db_, artist_list)
+    print 'debug mode'
+    sys.exit(0)
+
 p = 1
 
 if '-p' in sys.argv:

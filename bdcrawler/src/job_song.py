@@ -73,6 +73,7 @@ def Start(db_, artist_list):
                                 body = res.read()
                                 conn_riak.request("PUT", RIAK_URL_TEMPLATE % songId, body, {'Content-Type': 'audio/mpeg'})
                                 res = conn_riak.getresponse()
+                                res.read()
                             Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId
                         Find_Song_Switch_[0] = True
