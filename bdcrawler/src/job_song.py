@@ -35,8 +35,24 @@ def Start(db_, artist_list):
     RIAK_URL_TEMPLATE = '/buckets/music/keys/%s'
     RIAK_LRC_URL_TEMPLATE = '/buckets/lrc/keys/%s'
 
-    dwn_music = common.Downloader(RIAK_HOSTNAME, RIAK_URL_TEMPLATE)
-    dwn_lrc = common.Downloader(RIAK_HOSTNAME, RIAK_LRC_URL_TEMPLATE)
+    dwnn = int(common.get_argv('-dwnn', 25))
+
+    dwn_music = [common.Downloader(RIAK_HOSTNAME, RIAK_URL_TEMPLATE, dwnn)]
+    dwn_lrc = [common.Downloader(RIAK_HOSTNAME, RIAK_LRC_URL_TEMPLATE, dwnn)]
+
+    def dwn_music_destruct(this_):
+        dwn_music[0].close()
+        dwn_music[0] = common.Downloader(RIAK_HOSTNAME, RIAK_URL_TEMPLATE, dwnn)
+        dwn_music[0].evtExpire = dwn_music_destruct
+
+    dwn_music[0].evtExpire = dwn_music_destruct
+    
+    def dwn_lrc_destruct(this_):
+        dwn_lrc[0].close()
+        dwn_lrc[0] = common.Downloader(RIAK_HOSTNAME, RIAK_LRC_URL_TEMPLATE, dwnn)
+        dwn_lrc[0].evtExpire = dwn_lrc_destruct
+
+    dwn_lrc[0].evtExpire = dwn_lrc_destruct
 
     def Find_Song_Link(tag, attrs):
         try:
@@ -65,9 +81,9 @@ def Start(db_, artist_list):
                                 SongNameMap[songName] = None
                                 if(order > Order_[0] and songlink and songlink != ''):#important
                                     db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
-                                    dwn_music.transfer(songlink, songId, 'audio/mpeg')
+                                    dwn_music[0].transfer(songlink, songId, 'audio/mpeg')
                                     if lrclink.endswith('.lrc'):
-                                        dwn_lrc.transfer(lrclink, songId, 'text/plain')
+                                        dwn_lrc[0].transfer(lrclink, songId, 'text/plain')
                                     Order_[0] = Order_[0] + 1
                             #Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId

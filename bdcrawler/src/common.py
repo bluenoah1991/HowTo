@@ -41,14 +41,18 @@ def get_argv(tag, default):
 
 
 class Downloader(object):
-    def __init__(self, dest_hostname, dest_template):
+    def __init__(self, dest_hostname, dest_template, expire):
         try:
             self.dconn_ = httplib.HTTPConnection(dest_hostname)
             self.cpool_ = {}
             self.dt_ = dest_template
+            self.expire_ = expire
         except Exception, e:
             log('Downloader.__init__: ' + str(e))
     def transfer(self, uri, id_, mimeType):
+        self.expire_ = self.expire_ - 1
+        if(self.expire_ <= 0 and self.evtExpire is not None):
+            self.evtExpire(self)
         try:
             o = urlparse(uri)
             conn = None
@@ -66,4 +70,10 @@ class Downloader(object):
             res.read()
         except Exception, e:
             log('Downloader.transfer: ' + str(e))
-   
+    def close(self):
+        self.dconn_.close()
+        for (k, v) in self.cpool_.items():
+            if v is not None:
+                v.close()
+
+
