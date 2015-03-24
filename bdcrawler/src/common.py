@@ -69,7 +69,7 @@ class Downloader(object):
             res = self.dconn_.getresponse()
             res.read()
         except Exception, e:
-            log('Downloader.transfer: ' + str(e))
+            log('[%s]Downloader.transfer: ' % str(id_) + str(e))
     def close(self):
         self.dconn_.close()
         for (k, v) in self.cpool_.items():
