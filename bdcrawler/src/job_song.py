@@ -64,7 +64,7 @@ def Start(db_, artist_list):
                             href_ = href_[:href_.find('/')]
                         #Song_List_.add(href_)
                         raw_content = common.http_read(SongLink_URL_Template_ % href_)
-                        if not raw_content:
+                        if raw_content is None:
                             continue
                         raw_object = json.loads(raw_content)
                         songList = raw_object['data']['songList']
@@ -104,7 +104,7 @@ def Start(db_, artist_list):
             Find_Song_Switch_[0] = False
             raw_content = common.http_read(GetSongs_URL_Template_ % (s_, k_))
             s_ = s_ + 25
-            if not raw_content:
+            if raw_content is None:
                 continue
             try:
                 raw_object = json.loads(raw_content)
