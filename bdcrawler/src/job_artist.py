@@ -15,7 +15,7 @@ def Start(db_):
 
     URL_ = 'http://music.baidu.com/artist'
     PRE_URL_ = 'http://music.baidu.com'
-    
+     
     Category_List_ = set([])
     Category_List_Switch_ = True
     #Artist_List_ = {}

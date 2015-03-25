@@ -5,9 +5,9 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-import os, time, math, pdb
+import os, time, math, pdb, threading
 
-import db, job_artist, job_song
+import common, db, job_artist, job_song, job_hotnum
 
 #just once
 db_ = db.db('mongodb://192.168.20.66:27017/', 'local')
@@ -17,6 +17,32 @@ rs = job_artist.Start(db_)
 artist_list = db_.mode()
 count = len(artist_list)
 
+t = int(common.get_argv('-t', 1))
+
+print 'Thread : ' + str(t)
+
+b = int(math.ceil(count / t))
+
+threads = []
+
+for i in range(0, t):
+    begin = b * i
+    end = b * (i + 1)
+    if end >= count:
+        end = count - 1
+    t = threading.Thread(target=job_hotnum.Start, args=(db_, artist_list[begin:end]))
+    threads.append(t)
+    t.start()
+    #list_ = job_hotnum.Start(artist_list[begin:end])
+    #artist_list_.extend(list_)
+
+for t in threads:
+    t.join()
+
+artist_list = db_.mode2()
+
+count = len(artist_list)
+
 print 'Artist : ' + str(count)
 
 if '--debug' in sys.argv:
@@ -24,12 +50,7 @@ if '--debug' in sys.argv:
     print 'debug mode'
     sys.exit(0)
 
-p = 1
-
-if '-p' in sys.argv:
-    p_index = sys.argv.index('-p')
-    if p_index and p_index > 0 and len(sys.argv) > p_index + 1:
-        p = int(sys.argv[p_index + 1])
+p = int(common.get_argv('-p', 1))
 
 print 'Process : ' + str(p)
 
