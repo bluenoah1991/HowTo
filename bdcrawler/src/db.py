@@ -101,7 +101,7 @@ class db(object):
                     'songId': songId,
                     'mime': mime,
                     'type': type_,
-                    'over': false}
+                    'over': False}
             failed_db.insert(post)
         except Exception, e:
             common.log(e)
@@ -111,7 +111,7 @@ class db(object):
             global failed_
             failed_db = self.__db[failed_]
             post = {'songId': songId}
-            post_ = {'$set': {'over': true}}
+            post_ = {'$set': {'over': True}}
             failed_db.update(post, post_)
         except Exception, e:
             common.log(e)  
