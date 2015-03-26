@@ -42,6 +42,7 @@ def get_argv(tag, default):
 
 
 class Downloader(object):
+
     def __init__(self, dest_hostname, dest_template, expire):
         try:
             self.dconn_ = httplib.HTTPConnection(dest_hostname)
@@ -50,6 +51,7 @@ class Downloader(object):
             self.expire_ = expire
         except Exception, e:
             log('Downloader.__init__: ' + str(e))
+
     def transfer(self, uri, id_, mimeType):
         self.expire_ = self.expire_ - 1
         if(self.expire_ <= 0 and self.evtExpire is not None):
@@ -69,8 +71,11 @@ class Downloader(object):
             self.dconn_.request('PUT', self.dt_ % id_, body, {'Content-Type': mimeType})
             res = self.dconn_.getresponse()
             res.read()
+            return True
         except Exception, e:
             log('[%s]Downloader.transfer: ' % str(id_) + str(e))
+            return False
+
     def close(self):
         self.dconn_.close()
         for (k, v) in self.cpool_.items():
