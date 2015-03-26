@@ -84,7 +84,7 @@ def Start(db_, artist_list):
                                     for i in range(0, 3):
                                         if i > 0:
                                             common.log('try download music %s again, time: %d' % (songId, i))
-                                        if dwn_music[0].transfer(songlink, songId, 'audio/mpeg')
+                                        if dwn_music[0].transfer(songlink, songId, 'audio/mpeg'):
                                             break
                                         elif i == 2:
                                             db_.add_failed(songlink, songId, 'audio/mpeg', 1)
@@ -92,7 +92,7 @@ def Start(db_, artist_list):
                                         for i in range(0, 3):
                                             if i > 0:
                                                 common.log('try download lrc %s again, time: %d' % (songId, i))
-                                            if dwn_lrc[0].transfer(lrclink, songId, 'text/plain')
+                                            if dwn_lrc[0].transfer(lrclink, songId, 'text/plain'):
                                                 break
                                             elif i == 2:
                                                 db_.add_failed(songlink, songId, 'text/plain', 2)
