@@ -4,6 +4,7 @@
 artist_ = 'artist9'
 song_ = 'song9'
 artist_log_ = 'artist_log9'
+failed_ = 'failed'
 
 import threading
 
@@ -90,6 +91,30 @@ class db(object):
                 self.hot_lock.release()
             except Exception, e:
                 common.log(e)
+
+    #type_: 1 is music and 2 is lrc
+    def add_failed(self, songlink, songId, mime, type_):
+        try:
+            global failed_
+            failed_db = self.__db[failed_]
+            post = {'songlink': songlink,
+                    'songId': songId,
+                    'mime': mime,
+                    'type': type_,
+                    'over': false}
+            failed_db.insert(post)
+        except Exception, e:
+            common.log(e)
+
+    def kill_failed(self, songId):
+        try:
+            global failed_
+            failed_db = self.__db[failed_]
+            post = {'songId': songId}
+            post_ = {'$set': {'over': true}}
+            failed_db.update(post, post_)
+        except Exception, e:
+            common.log(e)  
 
     def get_song_cursor(self):
         try:
