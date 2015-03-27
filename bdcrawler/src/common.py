@@ -25,7 +25,7 @@ def http_read(url):
         handle.close()
         return raw_content
     except Exception, e:
-        pdb.set_trace()#TODO
+        #pdb.set_trace()#TODO
         log('http_read: ' + str(e))
         return None
 
