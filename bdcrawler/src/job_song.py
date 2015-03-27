@@ -95,7 +95,7 @@ def Start(db_, artist_list):
                                             if dwn_lrc[0].transfer(lrclink, songId, 'text/plain'):
                                                 break
                                             elif i == 2:
-                                                db_.add_failed(songlink, songId, 'text/plain', 2)
+                                                db_.add_failed(lrclink, songId, 'text/plain', 2)
                                     Order_[0] = Order_[0] + 1
                             #Order_[0] = Order_[0] + 1
                             print 'song %d has been saved.' % songId
