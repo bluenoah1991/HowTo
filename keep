@@ -6,3 +6,7 @@ pip install pymongo
 sudo vim /etc/default/docker
 add DOCKER_OPTS="-g /your/path"
 sudo service docker restart
+
+#operation docker images
+sudo docker save -o <save image to path> <image name>
+sudo docker load -i <path to image tar file>
