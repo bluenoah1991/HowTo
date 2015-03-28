@@ -1,2 +1,8 @@
+#install pymongo
 apt-get install python-pip
 pip install pymongo
+
+#modify docker images storage path
+sudo vim /etc/default/docker
+add DOCKER_OPTS="-g /your/path"
+sudo service docker restart
