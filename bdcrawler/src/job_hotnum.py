@@ -61,7 +61,7 @@ def Start(db_, list_):
             obj = db_.get_artist(l_)
             if obj:
                 obj.pop('_id')
-                elsup[0].transfer(json.dumps(obj), obj.artistId)
+                elsup[0].transfer(json.dumps(obj), obj['artist_id'])
             print 'artist %s hot num is %s' % (l_, parser.hotnum)
         except Exception, e:
             common.log('HotNumParser.feed: ' + str(e))

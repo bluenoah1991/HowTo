@@ -28,6 +28,7 @@ threads = []
 if '--debug' in sys.argv:
     job_hotnum.Start(db_, artist_list)
 else:
+    print 't is %d, b is %d' % (t, b)
     for i in range(0, t):
         begin = b * i
         end = b * (i + 1)
