@@ -25,19 +25,22 @@ b = int(math.ceil(count / t))
 
 threads = []
 
-for i in range(0, t):
-    begin = b * i
-    end = b * (i + 1)
-    if end >= count:
-        end = count - 1
-    t = threading.Thread(target=job_hotnum.Start, args=(db_, artist_list[begin:end]))
-    threads.append(t)
-    t.start()
-    #list_ = job_hotnum.Start(artist_list[begin:end])
-    #artist_list_.extend(list_)
-
-for t in threads:
-    t.join()
+if '--debug' in sys.argv:
+    job_hotnum.Start(db_, artist_list)
+else:
+    for i in range(0, t):
+        begin = b * i
+        end = b * (i + 1)
+        if end >= count:
+            end = count - 1
+        t = threading.Thread(target=job_hotnum.Start, args=(db_, artist_list[begin:end]))
+        threads.append(t)
+        t.start()
+        #list_ = job_hotnum.Start(artist_list[begin:end])
+        #artist_list_.extend(list_)
+    
+    for t in threads:
+        t.join()
 
 artist_list = db_.mode2()
 

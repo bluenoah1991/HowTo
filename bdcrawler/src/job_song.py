@@ -92,14 +92,14 @@ def Start(db_, artist_list):
                                 SongNameMap[songName] = None
                                 if(order > Order_[0] and songlink and songlink != ''):#important
                                     db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
-                                    jobj = {
+                                    obj = {
                                         "songId": songId,
                                         "songName": songName,
                                         "rate": rate,
                                         "size": size,
                                         "order": Order_[0],
                                         "artistId": artist_id}
-                                    elsup[0].transfer(json.dumps(jobj), songId)
+                                    elsup[0].transfer(json.dumps(obj), songId)
                                     #elsup[0].transfer('{'\
                                     #    '"songId": %d,'\
                                     #    '"songName": "%s",'\

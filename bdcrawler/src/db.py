@@ -92,6 +92,21 @@ class db(object):
             except Exception, e:
                 common.log(e)
 
+    def get_artist(self, artist_id):
+        if not artist_id:
+            common.log('get_artist: artist_id is null')
+            return None
+        try:
+            global artist_
+            artist_db = self.__db[artist_]
+            doc = artist_db.find_one({'artist_id': artist_id})
+            if doc:
+                return doc
+            else:
+                return None
+        except Exception, e:
+            common.log(e)
+
     #type_: 1 is music and 2 is lrc
     def add_failed(self, songlink, songId, mime, type_):
         try:
