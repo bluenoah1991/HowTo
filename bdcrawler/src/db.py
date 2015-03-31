@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-artist_ = 'artist9'
+artist_ = 'artist8'
 song_ = 'song9'
 artist_log_ = 'artist_log9'
 failed_ = 'failed'
