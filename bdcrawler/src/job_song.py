@@ -92,13 +92,21 @@ def Start(db_, artist_list):
                                 SongNameMap[songName] = None
                                 if(order > Order_[0] and songlink and songlink != ''):#important
                                     db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
-                                    elsup[0].transfer('{'\
-                                        '"songId": %d,'\
-                                        '"songName": "%s",'\
-                                        '"rate": %d,'\
-                                        '"size": %d,'\
-                                        '"order": %d,'\
-                                        '"artistId": "%s"}' % (songId, songName, rate, size, Order_[0], artist_id), songId)
+                                    jobj = {
+                                        "songId": songId,
+                                        "songName": songName,
+                                        "rate": rate,
+                                        "size": size,
+                                        "order": Order_[0],
+                                        "artistId": artist_id}
+                                    elsup[0].transfer(json.dumps(jobj), songId)
+                                    #elsup[0].transfer('{'\
+                                    #    '"songId": %d,'\
+                                    #    '"songName": "%s",'\
+                                    #    '"rate": %d,'\
+                                    #    '"size": %d,'\
+                                    #    '"order": %d,'\
+                                    #    '"artistId": "%s"}' % (songId, songName, rate, size, Order_[0], artist_id), songId)
                                     for i in range(0, 3):
                                         if i > 0:
                                             common.log('try download music %s again, time: %d' % (songId, i))

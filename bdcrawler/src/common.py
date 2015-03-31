@@ -98,7 +98,7 @@ class ElsUploader(object):
         if(self.expire_ <= 0 and self.evtExpire is not None):
             self.evtExpire(self)
         try:
-            self.dconn_.request('PUT', self.dt_ % id_, data, {})
+            self.dconn_.request('PUT', self.dt_ % id_, data, {'Content-Length': len(data)})
             res = self.dconn_.getresponse()
             res.read()
             return True
