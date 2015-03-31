@@ -37,8 +37,19 @@ def Start(db_, artist_list):
 
     dwnn = int(common.get_argv('-dwnn', 25))
 
+    ELS_HOSTNAME = str(common.get_argv('-esh', 'localhost:9200'))
+    ELS_URL_TEMPLATE = '/local/music/%s'
+
     dwn_music = [common.Downloader(RIAK_HOSTNAME, RIAK_URL_TEMPLATE, dwnn)]
     dwn_lrc = [common.Downloader(RIAK_HOSTNAME, RIAK_LRC_URL_TEMPLATE, dwnn)]
+    elsup = [common.ElsUploader(ELS_HOSTNAME, ELS_URL_TEMPLATE, dwnn)]
+
+    def elsup_destruct(this_):
+        elsup[0].close()
+        elsup[0] = common.ElsUploader(ELS_HOSTNAME, ELS_URL_TEMPLATE, dwnn)
+        elsup[0].evtExpire = elsup_destruct
+
+    elsup[0].evtExpire = elsup_destruct
 
     def dwn_music_destruct(this_):
         dwn_music[0].close()
@@ -81,6 +92,13 @@ def Start(db_, artist_list):
                                 SongNameMap[songName] = None
                                 if(order > Order_[0] and songlink and songlink != ''):#important
                                     db_.add_song(songId, songName, lrclink, songlink, rate, size, artist_id, Order_[0])
+                                    elsup[0].transfer('{'\
+                                        '"songId": %d,'\
+                                        '"songName": "%s",'\
+                                        '"rate": %d,'\
+                                        '"size": %d,'\
+                                        '"order": %d,'\
+                                        '"artistId": "%s"}' % (songId, songName, rate, size, Order_[0], artist_id), songId)
                                     for i in range(0, 3):
                                         if i > 0:
                                             common.log('try download music %s again, time: %d' % (songId, i))
