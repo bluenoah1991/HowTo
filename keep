@@ -10,3 +10,6 @@ sudo service docker restart
 #operation docker images
 sudo docker save -o <save image to path> <image name>
 sudo docker load -i <path to image tar file>
+
+#preinstall software in docker
+apt-get install vim wget tar make gcc g++ grep git
