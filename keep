@@ -13,3 +13,8 @@ sudo docker load -i <path to image tar file>
 
 #preinstall software in docker
 apt-get install vim wget tar make gcc g++ grep git
+
+#install hadoop hdfs
+need DNS reverse analysis or /etc/hosts
+cluster ID not match
+
