@@ -22,3 +22,6 @@ hostname !!!!!!!!!!!
 #install hadoop nfs gateway
 hadoop.proxyuser.<< nfsserver >>.groups
 use the << nfsserver >> start nfs3
+
+#install spark on yarn
+set hadoop conf dir !!!!!!!!!
