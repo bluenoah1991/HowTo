@@ -10,7 +10,7 @@ DBUSER=admin
 DBPWD=123456
 UPWD=123456
 ADMINNAME=zhouyy
-
+MAILDIR=/var/mail/vhosts/
 
 hostname ${HOSTNAME}
 echo ${HOSTNAME} > /etc/hostname
@@ -171,10 +171,10 @@ cp /etc/dovecot/conf.d/10-master.conf /etc/dovecot/conf.d/10-master.conf.orig
 cp /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.orig
 
 sed -i '/^!include_try/aprotocols = imap pop3 lmtp' /etc/dovecot/dovecot.conf
-sed -i '/^mail_location/cmail_location = maildir:/var/mail/vhosts/%d/%n' /etc/dovecot/conf.d/10-mail.conf
+sed -i "/^mail_location/cmail_location = maildir:${MAILDIR}%d/%n" /etc/dovecot/conf.d/10-mail.conf
 sed -i '/^#mail_privileged_group/cmail_privileged_group = mail' /etc/dovecot/conf.d/10-mail.conf
 
-mkdir -p /var/mail/vhosts/${DOMAIN}
+mkdir -p ${MAILDIR}${DOMAIN}
 groupadd -g 5000 vmail
 useradd -g vmail -u 5000 vmail -d /var/mail
 chown -R vmail:vmail /var/mail
@@ -190,7 +190,7 @@ sed -i "`expr ${l1} + 4`cargs = \/etc\/dovecot\/dovecot-sql.conf.ext" /etc/dovec
 
 l1=`grep -n '^userdb {' /etc/dovecot/conf.d/auth-sql.conf.ext | head -1 | cut -d : -f 1`
 sed -i "`expr ${l1} + 1`s/sql/static/" /etc/dovecot/conf.d/auth-sql.conf.ext
-sed -i "`expr ${l1} + 2`cargs = uid=vmail gid=vmail home=/var/mail/vhosts/%d/%n" /etc/dovecot/conf.d/auth-sql.conf.ext
+sed -i "`expr ${l1} + 2`cargs = uid=vmail gid=vmail home=${MAILDIR}%d/%n" /etc/dovecot/conf.d/auth-sql.conf.ext
 
 sed -i '/^#driver/cdriver = mysql' /etc/dovecot/dovecot-sql.conf.ext
 sed -i "/^#connect/cconnect = host=127.0.0.1 dbname=${DBNAME} user=${DBUSER} password=${DBPWD}" /etc/dovecot/dovecot-sql.conf.ext
