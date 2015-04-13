@@ -176,8 +176,8 @@ sed -i '/^#mail_privileged_group/cmail_privileged_group = mail' /etc/dovecot/con
 
 mkdir -p ${MAILDIR}${DOMAIN}
 groupadd -g 5000 vmail
-useradd -g vmail -u 5000 vmail -d /var/mail
-chown -R vmail:vmail /var/mail
+useradd -g vmail -u 5000 vmail -d ${MAILDIR}
+chown -R vmail:vmail ${MAILDIR}
 
 sed -i '/^#disable_plaintext_auth/s/#//' /etc/dovecot/conf.d/10-auth.conf
 sed -i '/^auth_mechanisms/cauth_mechanisms = plain login' /etc/dovecot/conf.d/10-auth.conf
