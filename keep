@@ -29,3 +29,17 @@ set hadoop conf dir !!!!!!!!!
 #configure iptables
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 
+#about debug tomcat
+
+/usr/share/tomcat7/bin/setenv.sh
+JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+/usr/share/tomcat7/bin/startup.sh
+exec "$PRGDIR"/"$EXECUTABLE" jpda start "$@"
+
+/usr/share/tomcat7/bin/catalina.sh jpda start
+
+sudo jdb -attach 8000 -sourcepath src/main/java/com/linkgent/mail/
+
+
+
+
