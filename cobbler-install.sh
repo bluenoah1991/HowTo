@@ -17,11 +17,26 @@ wget http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/Cen
 cp home:libertas-ict:cobbler26.repo /etc/yum.repos.d/
 yum update
 
-rpm -Uvi http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-
 yum -y install Django cobbler
 
 sed -i "/^default_password_crypted/cdefault_password_crypted: \"$(openssl passwd -1)\"" /etc/cobbler/settings
 sed -i "/^server:/cserver: ${IPADDR}" /etc/cobbler/settings
 sed -i "/^next_server:/cnext_server: ${IPADDR}" /etc/cobbler/settings
 sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
+
+# vim /etc/cobbler/dhcp.template
+
+#service httpd stop
+#service httpd start
+#service cobblerd start
+#chkconfig cobblerd on
+#service cobblerd status
+
+#cobbler check
+
+#yum install dhcp
+
+#rpm -Uvi http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+
+
