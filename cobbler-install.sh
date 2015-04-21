@@ -1,6 +1,10 @@
 #!/bin/bash
 
-#/var need 5-10GB of free space
+# /var need 5-10GB of free space
+
+# Disable SELinux
+# https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Enabling_and_Disabling_SELinux-Disabling_SELinux.html
+# SELINUX=disabled
 
 yum update
 yum -y install createrepo httpd mkisofs mod_wsgi mod_ssl python-cheetah python-netaddr python-simplejson python-urlgrabber PyYAML rsync syslinux tftp-server yum-utils
