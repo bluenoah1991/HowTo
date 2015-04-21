@@ -36,8 +36,19 @@ sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
 
 #yum install dhcp
 
-#rpm -Uvi http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-#yum update
-#yum -y install Django
+#cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
+#vim /etc/dhcp/dhcpd.conf  <----
+#service dhcpd start
+#vim /etc/xinetd.d/tftp  <----
+#vim /etc/xinetd.d/rsync  <----
 
+#rpm -Uvi http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+#yum install debmirror pykickstart cman
+
+#comment out 'dists' on /etc/debmirror.conf for proper debian support
+#comment out 'arches' on /etc/debmirror.conf for proper debian support
+
+#service cobblerd restart
+#cobbler sync
 
