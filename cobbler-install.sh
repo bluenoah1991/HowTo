@@ -26,12 +26,12 @@ sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
 
 # vim /etc/cobbler/dhcp.template
 
-#service httpd stop
-#service httpd start
 #service cobblerd start
 #chkconfig cobblerd on
 #service cobblerd status
-
+#service httpd stop
+#service httpd start
+#service cobblerd restart
 #cobbler check
 
 #yum install dhcp
