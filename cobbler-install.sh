@@ -52,3 +52,7 @@ sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
 #service cobblerd restart
 #cobbler sync
 
+#service iptables stop
+#service xinetd stop
+#service xinetd start
+
