@@ -40,6 +40,14 @@ exec "$PRGDIR"/"$EXECUTABLE" jpda start "$@"
 
 sudo jdb -attach 8000 -sourcepath src/main/java/com/linkgent/mail/
 
+#install cobbler
+
+cobbler check ---> error
+service httpd stop
+service httpd start
+service cobblerd restart
+
+
 
 
 
