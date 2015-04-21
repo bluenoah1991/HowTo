@@ -37,7 +37,7 @@ sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
 #yum install dhcp
 
 #cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
-#vim /etc/dhcp/dhcpd.conf  <----
+#vim /etc/dhcp/dhcpd.conf  <---- http://geekpeek.net/how-to-install-dhcp-server-centos/
 #service dhcpd start
 #vim /etc/xinetd.d/tftp  <----
 #vim /etc/xinetd.d/rsync  <----
