@@ -21,7 +21,7 @@ rpm -Uvi http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.r
 
 yum -y install Django cobbler
 
-sed -i "/^default_password_crypted/cdefault_password_crypted: \"$(openssl passwd -1)\" /etc/cobbler/settings
-sed -i "/^server:/cserver: $IPADDR" /etc/cobbler/settings
-sed -i "/^next_server:/cnext_server: $IPADDR" /etc/cobbler/settings
+sed -i "/^default_password_crypted/cdefault_password_crypted: \"$(openssl passwd -1)\"" /etc/cobbler/settings
+sed -i "/^server:/cserver: ${IPADDR}" /etc/cobbler/settings
+sed -i "/^next_server:/cnext_server: ${IPADDR}" /etc/cobbler/settings
 sed -i "/^manage_dhcp:/cmanage_dhcp: 1" /etc/cobbler/settings
