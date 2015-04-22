@@ -32,6 +32,8 @@ RANDPWD=`openssl rand -hex 10`
 
 apt-get install keystone python-keystoneclient -y
 
+cp /etc/keystone/keystone.conf /etc/keystone/keystone.conf.bak
+
 sed -i "/^#admin_token/cadmin_token = ${RANDPWD}" /etc/keystone/keystone.conf
 sed -i "/^connection=/cconnection = mysql://keystone:${KEYSTONEPWD}@${CTL_IPADDR}/keystone" \
 /etc/keystone/keystone.conf
