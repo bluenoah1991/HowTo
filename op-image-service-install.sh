@@ -3,7 +3,7 @@
 GLANCEPWD=123456 
 GLANCE_PASS=123456 
 CTL_IPADDR=10.0.0.11
-
+ADMIN_PASS=123456 # from identity service
 
 echo 'Please tell me your MariaDB password:'
 read MARIADBPWD
@@ -26,7 +26,12 @@ ${sql2};
 
 EOF
 
-source /root/admin-openrc.sh
+export OS_TENANT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=${ADMIN_PASS}
+export OS_AUTH_URL=http://${CTL_IPADDR}:35357/v2.0
+
+echo "$OS_AUTH_URL !!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 keystone user-create --name glance --pass ${GLANCE_PASS}
 keystone user-role-add --user glance --tenant service --role admin
