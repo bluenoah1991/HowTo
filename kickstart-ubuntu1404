@@ -22,7 +22,7 @@ timezone America/New_York
 rootpw --disabled
 
 #Initial user (user with sudo capabilities) 
-user ubuntu --fullname "Ubuntu User" --password root4me2
+user ubuntu --fullname "Ubuntu User" --password 123456
 
 #Reboot after installation
 reboot
@@ -62,10 +62,11 @@ part /boot --fstype ext4 --size 256 --asprimary
 auth  --useshadow  --enablemd5 
 
 #Network information
-network --bootproto=dhcp --device=eth0
+#network --bootproto=dhcp --device=eth0
 
 #Firewall configuration
 firewall --disabled --trust=eth0 --ssh 
 
 #Do not configure the X Window System
 skipx
+
