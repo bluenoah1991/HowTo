@@ -7,6 +7,6 @@ sed -i "/^#net.ipv4.conf.all.rp_filter=1/cnet.ipv4.conf.all.rp_filter=0" /etc/sy
 sysctl -p
 
 apt-get install neutron-plugin-ml2 neutron-plugin-openvswitch-agent \
-  neutron-l3-agent neutron-dhcp-agent
+  neutron-l3-agent neutron-dhcp-agent -y
 
 
