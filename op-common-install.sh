@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# controller node: ./op-common-install.sh
+# other node: ./op-common-install.sh [controller node hostname]
+
 CTL_MGR_IPADDR=10.0.0.11
 RABBIT_PASS=123456
 
