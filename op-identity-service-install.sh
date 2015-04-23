@@ -39,7 +39,7 @@ sed -i "/^connection=/cconnection = mysql://keystone:${KEYSTONEPWD}@${CTL_IPADDR
 /etc/keystone/keystone.conf
 sed -i "/^#provider=/cprovider = keystone.token.providers.uuid.Provider" /etc/keystone/keystone.conf
 sed -i "/^#driver=keystone.token.persistence.backends.sql.Token/s/#//" /etc/keystone/keystone.conf
-sed -i "/^#driver=keystone.contrib.revoke.backends.kvs.Revoke/s/#//" /etc/keystone/keystone.conf
+sed -i "/^#driver=keystone.contrib.revoke.backends.sql.Revoke/s/#//" /etc/keystone/keystone.conf
 sed -i "/^#verbose=false/cverbose = True" /etc/keystone/keystone.conf
 
 su -s /bin/sh -c "keystone-manage db_sync" keystone
