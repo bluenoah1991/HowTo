@@ -50,7 +50,7 @@ sed -i "/^connection/cconnection = mysql://neutron:${NEUTRON_DBPASS}@${CTL_HOST}
 sed -i "/^#rpc_backend=rabbit/s/#//" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_host=localhost/crabbit_host = ${CTL_HOST}" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_password=guest/crabbit_password = ${RABBIT_PASS}" /etc/neutron/neutron.conf
-sed -i "/^# auth_strategy/s/#//" /etc/neutron/neutron.conf
+sed -i "/^# auth_strategy/s/# //" /etc/neutron/neutron.conf
 sed -i "/^auth_host/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_port/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_protocol/s/^/#/" /etc/neutron/neutron.conf
@@ -63,8 +63,8 @@ sed -i "/^admin_user/cadmin_user = neutron" /etc/neutron/neutron.conf
 sed -i "/^admin_password/cadmin_password = ${NEUTRON_PASS}" /etc/neutron/neutron.conf
 sed -i "/^# service_plugins/cservice_plugins = router" /etc/neutron/neutron.conf
 sed -i "/^# allow_overlapping_ips/callow_overlapping_ips = True" /etc/neutron/neutron.conf
-sed -i "/^# notify_nova_on_port_status_changes = True/s/#//" /etc/neutron/neutron.conf
-sed -i "/^# notify_nova_on_port_data_changes = True/s/#//" /etc/neutron/neutron.conf
+sed -i "/^# notify_nova_on_port_status_changes = True/s/# //" /etc/neutron/neutron.conf
+sed -i "/^# notify_nova_on_port_data_changes = True/s/# //" /etc/neutron/neutron.conf
 sed -i "/^# nova_url/cnova_url = http://${CTL_HOST}:8774/v2" /etc/neutron/neutron.conf
 sed -i "/^# nova_admin_auth_url/cnova_admin_auth_url = http://${CTL_HOST}:35357/v2.0" /etc/neutron/neutron.conf
 sed -i "/^# nova_region_name/cnova_region_name = regionOne" /etc/neutron/neutron.conf
@@ -80,8 +80,8 @@ sed -i "/^# type_drivers/ctype_drivers = flat,gre" /etc/neutron/plugins/ml2/ml2_
 sed -i "/^# tenant_network_types/ctenant_network_types = gre" /etc/neutron/plugins/ml2/ml2_conf.ini
 sed -i "/^# mechanism_drivers/cmechanism_drivers = openvswitch" /etc/neutron/plugins/ml2/ml2_conf.ini
 sed -i "/^# tunnel_id_ranges/ctunnel_id_ranges = 1:1000" /etc/neutron/plugins/ml2/ml2_conf.ini
-sed -i "/^# enable_security_group/s/#//" /etc/neutron/plugins/ml2/ml2_conf.ini
-sed -i "/^# enable_ipset/s/#//" /etc/neutron/plugins/ml2/ml2_conf.ini
+sed -i "/^# enable_security_group/s/# //" /etc/neutron/plugins/ml2/ml2_conf.ini
+sed -i "/^# enable_ipset/s/# //" /etc/neutron/plugins/ml2/ml2_conf.ini
 echo "firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 
 # To configure Compute to use Networking
