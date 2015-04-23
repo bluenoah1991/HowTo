@@ -50,6 +50,9 @@ rm -f /var/lib/keystone/keystone.db
 export OS_SERVICE_TOKEN=${RANDPWD}
 export OS_SERVICE_ENDPOINT=http://${CTL_IPADDR}:35357/v2.0
 
+echo 'Wait a minitues... (Press any key to continue)'
+read TMP
+
 keystone tenant-create --name admin --description "Admin Tenant"
 keystone user-create --name admin --pass ${ADMIN_PASS} --email ${EMAIL_ADDRESS}
 keystone role-create --name admin
