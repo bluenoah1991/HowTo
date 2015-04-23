@@ -31,8 +31,6 @@ export OS_USERNAME=admin
 export OS_PASSWORD=${ADMIN_PASS}
 export OS_AUTH_URL=http://${CTL_IPADDR}:35357/v2.0
 
-echo "$OS_AUTH_URL !!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
 keystone user-create --name glance --pass ${GLANCE_PASS}
 keystone user-role-add --user glance --tenant service --role admin
 keystone service-create --name glance --type image \
