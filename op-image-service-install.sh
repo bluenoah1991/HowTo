@@ -2,7 +2,7 @@
 
 GLANCEPWD=123456 
 GLANCE_PASS=123456 
-CTL_IPADDR=10.0.0.11
+CTL_IPADDR=controller
 ADMIN_PASS=123456 # from identity service
 
 echo 'Please tell me your MariaDB password:'

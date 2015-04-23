@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CTL_MGR_IPADDR=10.0.0.11
+CTL_MGR_IPADDR=controller
 RABBIT_PASS=123456
 
 

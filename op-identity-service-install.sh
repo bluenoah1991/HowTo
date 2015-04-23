@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KEYSTONEPWD=123456 
-CTL_IPADDR=10.0.0.11
+CTL_IPADDR=controller
 ADMIN_PASS=123456
 EMAIL_ADDRESS=admin@linkgent.com
 DEMO_PASS=123456
@@ -39,7 +39,7 @@ sed -i "/^connection=/cconnection = mysql://keystone:${KEYSTONEPWD}@${CTL_IPADDR
 /etc/keystone/keystone.conf
 sed -i "/^#provider=/cprovider = keystone.token.providers.uuid.Provider" /etc/keystone/keystone.conf
 sed -i "/^#driver=keystone.token.persistence.backends.sql.Token/s/#//" /etc/keystone/keystone.conf
-sed -i "/^#driver=keystone.contrib.revoke.backends.sql.Revoke/s/#//" /etc/keystone/keystone.conf
+sed -i "/^#driver=keystone.contrib.revoke.backends.kvs.Revoke/cdriver=keystone.contrib.revoke.backends.sql.Revoke" /etc/keystone/keystone.conf
 sed -i "/^#verbose=false/cverbose = True" /etc/keystone/keystone.conf
 
 su -s /bin/sh -c "keystone-manage db_sync" keystone
