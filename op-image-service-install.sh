@@ -46,7 +46,7 @@ apt-get install glance python-glanceclient -y
 
 sed -i "/#connection = <None>/cconnection = mysql://glance:${GLANCE_DBPASS}@${CTL_IPADDR}/glance" \
 /etc/glance/glance-api.conf
-ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-api.conf | head -1 | cut-d : -f 1`
+ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-api.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_keystone_authtoken}aauth_uri = http://${CTL_IPADDR}:5000/v2.0" /etc/glance/glance-api.conf
 sed -i "/^identity_uri/cidentity_uri = http://${CTL_IPADDR}:35357" /etc/glance/glance-api.conf
 sed -i "/^admin_tenant_name/cadmin_tenant_name = service" /etc/glance/glance-api.conf
@@ -56,7 +56,7 @@ sed -i "/^#flavor=/cflavor = keystone" /etc/glance/glance-api.conf
 sed -i "/^# notification_driver = noop/s/#//" /etc/glance/glance-api.conf
 sed -i "/^#verbose/cverbose = True" /etc/glance/glance-api.conf
 sed -i "/^#connection = <None>/cconnection = mysql://glance:${GLANCE_DBPASS}@${CTL_IPADDR}/glance" /etc/glance/glance-registry.conf
-ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-registry.conf | head -1 | cut-d : -f 1`
+ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-registry.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_keystone_authtoken}aauth_uri = http://${CTL_IPADDR}:5000/v2.0" /etc/glance/glance-registry.conf
 sed -i "/^identity_uri/cidentity_uri = http://${CTL_IPADDR}:35357" /etc/glance/glance-registry.conf
 sed -i "/^admin_tenant_name/cadmin_tenant_name = service" /etc/glance/glance-registry.conf
