@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GLANCEPWD=123456 
+GLANCE_DBPASS=123456 
 GLANCE_PASS=123456 
 CTL_IPADDR=controller
 ADMIN_PASS=123456 # from identity service
@@ -10,11 +10,11 @@ read MARIADBPWD
 
 sql1="
   GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' 
-  IDENTIFIED BY '${GLANCEPWD}'
+  IDENTIFIED BY '${GLANCE_DBPASS}'
 "
 sql2="
   GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' 
-  IDENTIFIED BY '${GLANCEPWD}'
+  IDENTIFIED BY '${GLANCE_DBPASS}'
 "
 
 mysql -uroot -p${MARIADBPWD} << EOF
@@ -43,4 +43,37 @@ keystone endpoint-create \
   --region regionOne
 
 apt-get install glance python-glanceclient -y
+
+sed -i "/#connection = <None>/cconnection = mysql://glance:${GLANCE_DBPASS}@${CTL_IPADDR}/glance" \
+/etc/glance/glance-api.conf
+ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-api.conf | head -1 | cut-d : -f 1`
+sed -i "${ln_keystone_authtoken}aauth_uri = http://${CTL_IPADDR}:5000/v2.0" /etc/glance/glance-api.conf
+sed -i "/^identity_uri/cidentity_uri = http://${CTL_IPADDR}:35357" /etc/glance/glance-api.conf
+sed -i "/^admin_tenant_name/cadmin_tenant_name = service" /etc/glance/glance-api.conf
+sed -i "/^admin_user/cadmin_user = glance" /etc/glance/glance-api.conf
+sed -i "/^admin_password/cadmin_password = ${GLANCE_PASS}" /etc/glance/glance-api.conf
+sed -i "/^#flavor=/cflavor = keystone" /etc/glance/glance-api.conf
+sed -i "/^# notification_driver = noop/s/#//" /etc/glance/glance-api.conf
+sed -i "/^#verbose/cverbose = True" /etc/glance/glance-api.conf
+sed -i "/^#connection = <None>/cconnection = mysql://glance:${GLANCE_DBPASS}@${CTL_IPADDR}/glance" /etc/glance/glance-registry.conf
+ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/glance/glance-registry.conf | head -1 | cut-d : -f 1`
+sed -i "${ln_keystone_authtoken}aauth_uri = http://${CTL_IPADDR}:5000/v2.0" /etc/glance/glance-registry.conf
+sed -i "/^identity_uri/cidentity_uri = http://${CTL_IPADDR}:35357" /etc/glance/glance-registry.conf
+sed -i "/^admin_tenant_name/cadmin_tenant_name = service" /etc/glance/glance-registry.conf
+sed -i "/^admin_user/cadmin_user = glance" /etc/glance/glance-registry.conf
+sed -i "/^admin_password/cadmin_password = ${GLANCE_PASS}" /etc/glance/glance-registry.conf
+sed -i "/^#flavor=/cflavor = keystone" /etc/glance/glance-registry.conf
+sed -i "/^# notification_driver = noop/s/#//" /etc/glance/glance-registry.conf
+sed -i "/^#verbose/cverbose = True" /etc/glance/glance-registry.conf
+
+su -s /bin/sh -c "glance-manage db_sync" glance
+service glance-registry restart
+service glance-api restart
+rm -f /var/lib/glance/glance.sqlite
+
+
+
+
+
+
 
