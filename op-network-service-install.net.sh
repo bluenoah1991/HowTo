@@ -52,7 +52,7 @@ sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/
 sed -i "/^# use_namespaces = True/s/# //" /etc/neutron/l3_agent.ini
 sed -i "/^# external_network_bridge = br-ex/s/# //" /etc/neutron/l3_agent.ini
 ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/l3_agent.ini | head -1 | cut -d : -f 1`
-sed -i "$ln_default}a\\
+sed -i "${ln_default}a\\
 router_delete_namespaces = True\\
 verbose = True" /etc/neutron/l3_agent.ini
 sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/s/# //" /etc/neutron/dhcp_agent.ini
