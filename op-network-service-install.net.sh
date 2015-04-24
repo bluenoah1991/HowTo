@@ -48,9 +48,16 @@ echo "enable_tunneling = True" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 echo "bridge_mappings = external:br-ex" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 echo "[agent]" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 echo "tunnel_types = gre" >> /etc/neutron/plugins/ml2/ml2_conf.ini
-sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/s/#//" /etc/neutron/l3_agent.ini
-sed -i "/^# use_namespaces = True/s/#//" /etc/neutron/l3_agent.ini
+sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/s/# //" /etc/neutron/l3_agent.ini
+sed -i "/^# use_namespaces = True/s/# //" /etc/neutron/l3_agent.ini
+sed -i "/^# external_network_bridge = br-ex/s/# //" /etc/neutron/l3_agent.ini
 ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/l3_agent.ini | head -1 | cut -d : -f 1`
+sed -i "$ln_default}a\\
+router_delete_namespaces = True\\
+verbose = True" /etc/neutron/l3_agent.ini
+sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/s/# //" /etc/neutron/dhcp_agent.ini
+sed -i "/^# use_namespaces = True/s/# //" /etc/neutron/dhcp_agent.ini
+ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/dhcp_agent.ini | head -1 | cut -d : -f 1`
 sed -i "${ln_default}a\\
 dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq\\
 dhcp_delete_namespaces = True\\
