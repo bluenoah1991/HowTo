@@ -18,6 +18,9 @@ sed -i "/^#rpc_backend=rabbit/s/#//" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_host=localhost/crabbit_host = ${CTL_HOST}" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_password=guest/crabbit_password = ${RABBIT_PASS}" /etc/neutron/neutron.conf
 sed -i "/^# auth_strategy/s/#//" /etc/neutron/neutron.conf
+sed -i "/^auth_host/s/^/#/" /etc/neutron/neutron.conf
+sed -i "/^auth_port/s/^/#/" /etc/neutron/neutron.conf
+sed -i "/^auth_protocol/s/^/#/" /etc/neutron/neutron.conf
 ln_keystone_authtoken=`grep -n '^\[keystone_authtoken\]' /etc/neutron/neutron.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_keystone_authtoken}a\\
 auth_uri = http://${CTL_HOST}:5000/v2.0\\
