@@ -15,6 +15,7 @@ sysctl -p
 apt-get install neutron-plugin-ml2 neutron-plugin-openvswitch-agent \
   neutron-l3-agent neutron-dhcp-agent -y
 
+sed -i "/^connection/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^#rpc_backend=rabbit/s/#//" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_host=localhost/crabbit_host = ${CTL_HOST}" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_password=guest/crabbit_password = ${RABBIT_PASS}" /etc/neutron/neutron.conf
