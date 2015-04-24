@@ -3,6 +3,7 @@
 CTL_HOST=controller
 NEUTRON_PASS=123456
 INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS=10.0.1.21
+METADATA_SECRET=123456
 
 sed -i "/^#net.ipv4.ip_forward=1/s/#//" /etc/sysctl.conf
 sed -i "/^#net.ipv4.conf.default.rp_filter=1/cnet.ipv4.conf.default.rp_filter=0" /etc/sysctl.conf
@@ -61,8 +62,6 @@ sed -i "/^# metadata_proxy_shared_secret =/cmetadata_proxy_shared_secret = ${MET
 ln_default=`grep -n '\^[DEFAULT\]' /etc/neutron/metadata_agent.ini | head -1 | cut -d : -f 1`
 sed -i "${ln_default}a\\
 verbose = True" /etc/neutron/metadata_agent.ini
-
-
 
 
 
