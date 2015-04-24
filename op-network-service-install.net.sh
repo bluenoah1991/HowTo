@@ -64,10 +64,3 @@ sed -i "${ln_default}a\\
 verbose = True" /etc/neutron/metadata_agent.ini
 
 
-
-
-
-
-
-
-
