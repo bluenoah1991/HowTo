@@ -54,7 +54,7 @@ sed -i "/^# auth_strategy/s/# //" /etc/neutron/neutron.conf
 sed -i "/^auth_host/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_port/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_protocol/s/^/#/" /etc/neutron/neutron.conf
-ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/neutron/neutron.conf | head -1 | cut -d : -f 1`
+ln_keystone_authtoken=`grep -n '^\[keystone_authtoken\]' /etc/neutron/neutron.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_keystone_authtoken}a\\
 auth_uri = http://${CTL_HOST}:5000/v2.0\\
 identity_uri = http://${CTL_HOST}:35357" /etc/neutron/neutron.conf
@@ -86,7 +86,7 @@ echo "firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesF
 
 # To configure Compute to use Networking
 
-ln_default=`grep -n '\^[DEFAULT\]' /etc/nova/nova.conf | head -1 | cut -d : -f 1`
+ln_default=`grep -n '^\[DEFAULT\]' /etc/nova/nova.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_default}a\\
 network_api_class = nova.network.neutronv2.api.API\\
 security_group_api = neutron\\

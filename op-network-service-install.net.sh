@@ -18,7 +18,7 @@ sed -i "/^#rpc_backend=rabbit/s/#//" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_host=localhost/crabbit_host = ${CTL_HOST}" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_password=guest/crabbit_password = ${RABBIT_PASS}" /etc/neutron/neutron.conf
 sed -i "/^# auth_strategy/s/#//" /etc/neutron/neutron.conf
-ln_keystone_authtoken=`grep -n '\^[keystone_authtoken\]' /etc/neutron/neutron.conf | head -1 | cut -d : -f 1`
+ln_keystone_authtoken=`grep -n '^\[keystone_authtoken\]' /etc/neutron/neutron.conf | head -1 | cut -d : -f 1`
 sed -i "${ln_keystone_authtoken}a\\
 auth_uri = http://${CTL_HOST}:5000/v2.0\\
 identity_uri = http://${CTL_HOST}:35357" /etc/neutron/neutron.conf
@@ -45,7 +45,7 @@ echo "[agent]" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 echo "tunnel_types = gre" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 sed -i "/^# interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver/s/#//" /etc/neutron/l3_agent.ini
 sed -i "/^# use_namespaces = True/s/#//" /etc/neutron/l3_agent.ini
-ln_default=`grep -n '\^[DEFAULT\]' /etc/neutron/l3_agent.ini | head -1 | cut -d : -f 1`
+ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/l3_agent.ini | head -1 | cut -d : -f 1`
 sed -i "${ln_default}a\\
 dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq\\
 dhcp_delete_namespaces = True\\
@@ -59,7 +59,7 @@ sed -i "/^admin_user/cadmin_user = neutron" /etc/neutron/metadata_agent.ini
 sed -i "/^admin_password/cadmin_password = ${NEUTRON_PASS}" /etc/neutron/metadata_agent.ini
 sed -i "/^# nova_metadata_ip = 127.0.0.1/cnova_metadata_ip = ${CTL_HOST}" /etc/neutron/metadata_agent.ini
 sed -i "/^# metadata_proxy_shared_secret =/cmetadata_proxy_shared_secret = ${METADATA_SECRET}" /etc/neutron/metadata_agent.ini
-ln_default=`grep -n '\^[DEFAULT\]' /etc/neutron/metadata_agent.ini | head -1 | cut -d : -f 1`
+ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/metadata_agent.ini | head -1 | cut -d : -f 1`
 sed -i "${ln_default}a\\
 verbose = True" /etc/neutron/metadata_agent.ini
 
