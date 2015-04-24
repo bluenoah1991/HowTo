@@ -4,6 +4,7 @@ CTL_HOST=controller
 NEUTRON_PASS=123456
 INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS=10.0.1.21
 METADATA_SECRET=123456
+RABBIT_PASS=123456 # from rabbit mq
 
 sed -i "/^#net.ipv4.ip_forward=1/s/#//" /etc/sysctl.conf
 sed -i "/^#net.ipv4.conf.default.rp_filter=1/cnet.ipv4.conf.default.rp_filter=0" /etc/sysctl.conf
@@ -17,7 +18,7 @@ apt-get install neutron-plugin-ml2 neutron-plugin-openvswitch-agent \
 sed -i "/^#rpc_backend=rabbit/s/#//" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_host=localhost/crabbit_host = ${CTL_HOST}" /etc/neutron/neutron.conf
 sed -i "/^#rabbit_password=guest/crabbit_password = ${RABBIT_PASS}" /etc/neutron/neutron.conf
-sed -i "/^# auth_strategy/s/#//" /etc/neutron/neutron.conf
+sed -i "/^# auth_strategy/s/# //" /etc/neutron/neutron.conf
 sed -i "/^auth_host/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_port/s/^/#/" /etc/neutron/neutron.conf
 sed -i "/^auth_protocol/s/^/#/" /etc/neutron/neutron.conf
