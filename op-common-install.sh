@@ -52,12 +52,12 @@ fi
 apt-get install rabbitmq-server -y
 rabbitmqctl change_password guest ${RABBIT_PASS}
 
-rb_version=`rabbitmqctl status | grep rabbit | head -2 | cut -d '"' -f 4 | grep '^[0-9]' | head -1`
-rb_version=`echo ${rb_version} | cut -d '.' -f 1,2`
+#rb_version=`rabbitmqctl status | grep rabbit | head -2 | cut -d '"' -f 4 | grep '^[0-9]' | head -1`
+#rb_version=`echo ${rb_version} | cut -d '.' -f 1,2`
 
-if [ `echo "${rb_version} >= 3.3" | bc` -eq 1 ]; then
-  #T O D O
-fi
+#if [ `echo "${rb_version} >= 3.3" | bc` -eq 1 ]; then
+  #TODO
+#fi
 
 service rabbitmq-server restart
 
