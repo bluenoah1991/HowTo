@@ -56,7 +56,7 @@ rb_version=`rabbitmqctl status | grep rabbit | head -2 | cut -d '"' -f 4 | grep 
 rb_version=`echo ${rb_version} | cut -d '.' -f 1,2`
 
 if [ `echo "${rb_version} >= 3.3" | bc` -eq 1 ]; then
-  #TODO
+  #T O D O
 fi
 
 service rabbitmq-server restart
