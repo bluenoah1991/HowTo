@@ -45,10 +45,12 @@ echo "tunnel_types = gre" >> /etc/neutron/plugins/ml2/ml2_conf.ini
 
 service openvswitch-switch restart
 
-echo "network_api_class = nova.network.neutronv2.api.API" >> /etc/nova/nova.conf
-echo "security_group_api = neutron" >> /etc/nova/nova.conf
-echo "linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver" >> /etc/nova/nova.conf
-echo "firewall_driver = nova.virt.firewall.NoopFirewallDriver" >> /etc/nova/nova.conf
+ln_default=`grep -n '^\[DEFAULT\]' /etc/nova/nova.conf | head -1 | cut -d : -f 1`
+sed -i "${ln_default}a\\
+network_api_class = nova.network.neutronv2.api.API\\
+security_group_api = neutron\\
+linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver\\
+firewall_driver = nova.virt.firewall.NoopFirewallDriver" /etc/nova/nova.conf
 echo "[neutron]" >> /etc/nova/nova.conf
 echo "url = http://${CTL_HOST}:9696" >> /etc/nova/nova.conf
 echo "auth_strategy = keystone" >> /etc/nova/nova.conf
