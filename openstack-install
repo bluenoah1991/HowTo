@@ -3,7 +3,7 @@ op-identity-service-install.sh  --->  controller node
 op-image-service-install.sh   --->  controller node
 op-compute-service-install.ctr.sh  ---> controller node (just once)
 op-compute-service-install.cpt.sh  ---> compute nodes
-op-network-service-install.ctr.sh ---> controller node
+op-network-service-install.ctr.sh ---> controller node # 运行完毕后请检查软件是否安装完毕
 op-network-service-install.net.sh ---> network node
 op-network-service-install.net.2.sh ---> controller node
 op-network-service-install.net.3.sh ---> network node
