@@ -47,7 +47,7 @@ keystone endpoint-create \
 apt-get install nova-api nova-cert nova-conductor nova-consoleauth \
   nova-novncproxy nova-scheduler python-novaclient -y
 
-echo "#rpc_backend = rabbit" >> /etc/nova/nova.conf
+echo "rpc_backend = rabbit" >> /etc/nova/nova.conf
 echo "rabbit_host = ${CTL_HOST}" >> /etc/nova/nova.conf
 echo "rabbit_password = ${RABBIT_PASS}" >> /etc/nova/nova.conf
 echo "auth_strategy = keystone" >> /etc/nova/nova.conf
