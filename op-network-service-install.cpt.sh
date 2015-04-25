@@ -24,6 +24,9 @@ ln_keystone_authtoken=`grep -n '^\[keystone_authtoken\]' /etc/neutron/neutron.co
 sed -i "${ln_keystone_authtoken}a\\
 auth_uri = http://${CTL_HOST}:5000/v2.0\\
 identity_uri = http://${CTL_HOST}:35357" /etc/neutron/neutron.conf
+sed -i "/^admin_tenant_name/cadmin_tenant_name = service" /etc/neutron/neutron.conf
+sed -i "/^admin_user/cadmin_user = neutron" /etc/neutron/neutron.conf
+sed -i "/^admin_password/cadmin_password = ${NEUTRON_PASS}" /etc/neutron/neutron.conf
 sed -i "/^# service_plugins =/cservice_plugins = router" /etc/neutron/neutron.conf
 sed -i "/^# allow_overlapping_ips/callow_overlapping_ips = True" /etc/neutron/neutron.conf
 sed -i "/^# verbose = False/cverbose = True" /etc/neutron/neutron.conf
