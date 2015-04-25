@@ -7,7 +7,7 @@ MANAGEMENT_INTERFACE_IP_ADDRESS=10.0.0.31
 
 apt-get install nova-compute sysfsutils -y
 
-echo "#rpc_backend = rabbit" >> /etc/nova/nova.conf
+echo "rpc_backend = rabbit" >> /etc/nova/nova.conf
 echo "rabbit_host = ${CTL_HOST}" >> /etc/nova/nova.conf
 echo "rabbit_password = ${RABBIT_PASS}" >> /etc/nova/nova.conf
 echo "auth_strategy = keystone" >> /etc/nova/nova.conf
