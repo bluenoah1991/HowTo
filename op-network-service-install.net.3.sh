@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INTERFACE_NAME=eth0:3
+INTERFACE_NAME=eth1
 
 service openvswitch-switch restart
 
