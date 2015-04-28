@@ -47,6 +47,11 @@ service httpd stop
 service httpd start
 service cobblerd restart
 
+#install openstack
+/etc/hosts (comment 127.0.0.1)
+/etc/apt/source.list
+hostname
+/etc/network/interface
 
 
 
