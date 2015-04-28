@@ -61,3 +61,7 @@ rabbitmqctl change_password guest ${RABBIT_PASS}
 
 service rabbitmq-server restart
 
+sed -i "/^127.0.0.1/s/^/#/" /etc/hosts
+
+# Please reboot
+
