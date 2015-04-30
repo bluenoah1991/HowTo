@@ -75,4 +75,5 @@ ln_default=`grep -n '^\[DEFAULT\]' /etc/neutron/metadata_agent.ini | head -1 | c
 sed -i "${ln_default}a\\
 verbose = True" /etc/neutron/metadata_agent.ini
 
-
+# /etc/neutron/dhcp_agent.ini
+# dnsmasq_dns_servers = xxx
