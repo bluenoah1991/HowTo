@@ -53,6 +53,7 @@ service cobblerd restart
 hostname
 /etc/network/interface
 
-
+# jdb !!!!!!!!!!!!!!!!!!
+set -classpath
 
 
