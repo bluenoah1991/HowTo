@@ -18,6 +18,8 @@ apt-get install vim wget tar make gcc g++ grep git
 need DNS reverse analysis or /etc/hosts
 cluster ID not match
 hostname !!!!!!!!!!!
+tcp6
+
 
 #install hadoop nfs gateway
 hadoop.proxyuser.<< nfsserver >>.groups
