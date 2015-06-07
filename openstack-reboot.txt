@@ -1,0 +1,32 @@
+计算节点重启服务
+service rabbitmq-server restart
+service nova-compute restart
+service openvswitch-switch restart
+service neutron-plugin-openvswitch-agent restart
+
+控制节点
+service ntp restart
+service mysql restart
+service rabbitmq-server restart
+service keystone restart
+service glance-registry restart
+service glance-api restart
+service nova-api restart
+service nova-scheduler restart
+service nova-conductor restart
+service neutron-server restart
+service nova-cert restart
+service nova-consoleauth restart
+service nova-novncproxy restart
+
+网络节点
+service rabbitmq-server restart
+service openvswitch-switch restart
+service neutron-plugin-openvswitch-agent restart
+service neutron-l3-agent restart
+service neutron-dhcp-agent restart
+service neutron-metadata-agent restart
+
+Dashboard节点
+service apache2 restart
+service memcached restart
