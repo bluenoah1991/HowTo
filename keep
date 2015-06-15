@@ -64,4 +64,9 @@ hostname
 # jdb !!!!!!!!!!!!!!!!!!
 set -classpath
 
+# mail ssl connection error, errorCode: 5
+
+/etc/dovecot/dovecot.conf
+mail_max_userip_connections = 500
+
 
