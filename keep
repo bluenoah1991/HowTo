@@ -69,4 +69,7 @@ set -classpath
 /etc/dovecot/dovecot.conf
 mail_max_userip_connections = 500
 
+# jvm debug
+
+"-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000"
 
