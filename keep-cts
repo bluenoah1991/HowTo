@@ -1,2 +1,5 @@
 # centos 6.* mount -t nfs
 yum install nfs-utils rpcbind
+
+# hostname
+/etc/sysconfig/network
