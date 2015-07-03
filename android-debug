@@ -10,3 +10,13 @@ adb shell pm uninstall com.xxx.yyy.zzz
 adb push localFilePath deviceFilePath
 adb pull deviceFilePath localFilePath
 adb shell pm install /sdcard/xxx.apk
+
+mount -o rw,remount -t yaffs2 /dev/block/mtdblock3 /system
+adb remount
+
+gdbserver :5000 --attach 1234
+gdbserver :5001 ./a.out
+
+android-ndk-r10e\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-gdb.exe
+
+(gdb) target remote 10.0.0.1:5000
