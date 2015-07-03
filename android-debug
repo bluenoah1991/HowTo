@@ -4,3 +4,9 @@ adb shell
 
 adb forward tcp:5000 jdwp:<pid>
 jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=5000
+
+adb shell pm list packages
+adb shell pm uninstall com.xxx.yyy.zzz
+adb push localFilePath deviceFilePath
+adb pull deviceFilePath localFilePath
+adb shell pm install /sdcard/xxx.apk
