@@ -1,6 +1,7 @@
 adb devices
 adb jdwp
 adb shell
+adb connect ipaddr:port
 
 adb forward tcp:5000 jdwp:<pid>
 jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=5000
