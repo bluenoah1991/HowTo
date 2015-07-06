@@ -21,3 +21,7 @@ gdbserver :5001 ./a.out
 android-ndk-r10e\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-gdb.exe
 
 (gdb) target remote 10.0.0.1:5000
+
+###
+
+import android.os.Debug;
