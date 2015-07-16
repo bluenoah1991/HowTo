@@ -8,3 +8,5 @@ curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
 sudo apt-get install --yes nodejs
 
 npm install coffeeify
+
+browserify -t coffeeify xyz.coffee -o xyz.js
