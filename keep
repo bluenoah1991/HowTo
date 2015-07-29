@@ -89,4 +89,9 @@ make
 make install
 
 modify mosquitto.conf >>>  user root
+>>> listener 1883
+>>> 
+>>> listener 9001 0.0.0.0
+>>> protocol websockets
+
 mosquitto -c mosquitto.conf -d
