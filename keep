@@ -86,3 +86,7 @@ apt-get install libc-ares-dev
 apt-get install uuid-dev
 
 make
+make install
+
+modify mosquitto.conf >>>  user root
+mosquitto -c mosquitto.conf -d
