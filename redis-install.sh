@@ -4,6 +4,9 @@ PORT=6379
 REDIS_URL=http://download.redis.io/redis-stable.tar.gz
 REDIS_FILENAME=redis-stable.tar.gz
 
+apt-get update
+apt-get install make -y
+
 wget ${REDIS_URL} --output-document=/tmp/${REDIS_FILENAME}
 cd /tmp
 tar xvzf ${REDIS_FILENAME}
