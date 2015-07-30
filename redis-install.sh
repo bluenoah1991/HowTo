@@ -5,7 +5,7 @@ REDIS_URL=http://download.redis.io/redis-stable.tar.gz
 REDIS_FILENAME=redis-stable.tar.gz
 
 apt-get update
-apt-get install make -y
+apt-get install make gcc -y
 
 wget ${REDIS_URL} --output-document=/tmp/${REDIS_FILENAME}
 cd /tmp
