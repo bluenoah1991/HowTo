@@ -40,3 +40,6 @@ echo $RANDOM | md5sum | sed 's/\(..\)/&:/g' | cut -c1-17
 
 # update vm config
 vim /etc/libvirt/qemu/trusty1404.xml
+
+# dump vm config
+virsh dumpxml trusty1404 > /etc/libvirt/qemu/trusty1404-2.xml
