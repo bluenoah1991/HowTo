@@ -9,3 +9,21 @@ virsh undefine trusty1404
 
 virsh shutdown trusty1404
 virt-clone --original=trusty1404 --name=clone0 --file=/virt/disks/clone0.img
+
+# bridged networking
+
+auto eth0
+iface eth0 inet manual
+
+auto br0
+iface br0 inet static
+address ...
+netmask ...
+gateway ...
+bridge_ports eth0
+bridge_stp off
+bridge_fd 0
+bridge_maxwait 0
+
+dns-nameservers ...
+
