@@ -7,4 +7,5 @@ virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disk
 virsh destroy trusty1404
 virsh undefine trusty1404
 
+virsh shutdown trusty1404
 virt-clone --original=trusty1404 --name=clone0 --file=/virt/disks/clone0.img
