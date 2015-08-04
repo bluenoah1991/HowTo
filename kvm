@@ -4,6 +4,10 @@ virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disk
 --network network:default --accelerate --graphics vnc,listen=0.0.0.0,port=5911 \
 --cdrom /virt/images/ubuntu-14.04.2-server-amd64.iso -d
 
+virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disks/trusty1404.img,size=10 \
+--network bridge:br0 --accelerate --graphics vnc,listen=0.0.0.0,port=5911 \
+--cdrom /virt/images/ubuntu-14.04.2-server-amd64.iso -d
+
 virsh destroy trusty1404
 virsh undefine trusty1404
 
