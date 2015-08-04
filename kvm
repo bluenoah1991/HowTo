@@ -14,6 +14,13 @@ virsh undefine trusty1404
 virsh shutdown trusty1404
 virt-clone --original=trusty1404 --name=clone0 --file=/virt/disks/clone0.img
 
+# pool
+
+virsh pool-create-as --name master_pool --type dir --target /virt/disks
+virsh pool-info master_pool
+virsh pool-start master_pool
+virsh pool-list
+
 # bridged networking
 
 auto eth0
