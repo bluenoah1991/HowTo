@@ -1,7 +1,7 @@
 apt-get install qemu-kvm libvirt-bin virtinst bridge-utils
 
 virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disks/trusty1404.img,size=10 \
---network network:default --accelerate --vnc --vnclient=0.0.0.0 --vncport=5911 \
+--network network:default --accelerate --graphics vnc,listen=0.0.0.0,port=5911 \
 --cdrom /virt/images/ubuntu-14.04.2-server-amd64.iso -d
 
 virsh destroy trusty1404
