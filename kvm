@@ -27,3 +27,9 @@ bridge_maxwait 0
 
 dns-nameservers ...
 
+reboot
+
+brctl show
+
+# random mac
+echo $RANDOM | md5sum | sed 's/\(..\)/&:/g' | cut -c1-17
