@@ -4,3 +4,6 @@ List command on Node.js debugger returning only [Function]
 not
 > list
 
+node debug xxx.js
+
+node debug /your/path/grunt taskName
