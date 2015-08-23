@@ -1,0 +1,6 @@
+List command on Node.js debugger returning only [Function]
+
+> list() 
+not
+> list
+
