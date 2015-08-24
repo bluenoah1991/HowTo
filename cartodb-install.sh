@@ -86,6 +86,7 @@ EOF
 
 apt-get install libmapnik-dev python-mapnik mapnik-utils -y
 apt-get install nodejs-legacy -y
+apt-get install libpango1.0-dev libjpeg-dev -y
 
 npm config set registry https://registry.npm.taobao.org # CHANGE NPM SOURCE
 
