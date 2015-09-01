@@ -23,6 +23,8 @@ apt-get install redis-server -y
 apt-get install nodejs nodejs-legacy -y
 apt-get install npm -y
 
+apt-get install git -y
+
 cd /usr/local/src
 git clone https://github.com/CartoDB/CartoDB-SQL-API.git
 cd CartoDB-SQL-API
