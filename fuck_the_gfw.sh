@@ -53,5 +53,5 @@ quiet_mode
 socks5  127.0.0.1 1080
 " > ~/.proxychains/proxychains.conf
 
-echo "Help: proxychains [ your command ]
+echo "Help: proxychains [ your command ]"
 
