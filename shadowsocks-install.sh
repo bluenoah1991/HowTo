@@ -20,3 +20,5 @@ echo -e "
 " > /etc/shadowsocks.json
 
 ssserver -c /etc/shadowsocks.json -d start
+
+echo "success!"
