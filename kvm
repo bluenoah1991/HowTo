@@ -21,6 +21,11 @@ virsh pool-info master_pool
 virsh pool-start master_pool
 virsh pool-list
 
+# snapshot
+
+virsh snapshot-create-as trusty1404 snapshot1
+virsh snapshot-revert trusty1404 snapshot1
+
 # bridged networking
 
 auto eth0
