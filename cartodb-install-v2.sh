@@ -96,6 +96,7 @@ popd
 git clone --recursive https://github.com/CartoDB/cartodb.git
 pushd cartodb
 apt-get install imagemagick unp zip -y
+apt-get install ruby-dev -y
 RAILS_ENV=development bundle install
 proxychains npm install
 sudo -u root bash << EOF
