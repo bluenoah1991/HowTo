@@ -111,12 +111,15 @@ bundle exec ./node_modules/grunt-cli/bin/grunt --environment development
 cp config/app_config.yml.sample config/app_config.yml
 cp config/database.yml.sample config/database.yml
 
+RAILS_ENV=development bundle exec rake db:setup
+RAILS_ENV=development bundle exec rake db:migrate
 
+echo "127.0.0.1 development.localhost.lan" | sudo tee -a /etc/hosts
+sh script/create_dev_user development
+bundle exec rake cartodb:db:create_new_organization_with_owner ORGANIZATION_NAME="cartodb" ORGANIZATION_DISPLAY_NAME="CartoDB Inc." ORGANIZATION_SEATS="5" ORGANIZATION_QUOTA="1073741824" USERNAME="development"
 
-
-
-
-
+setsid bundle exec script/resque > /dev/null 2>&1 &
+setsid bundle exec rails s -p 3000 > /dev/null 2>&1 &
 
 
 
