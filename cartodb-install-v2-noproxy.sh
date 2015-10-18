@@ -67,7 +67,7 @@ git clone git://github.com/CartoDB/CartoDB-SQL-API.git
 pushd CartoDB-SQL-API
 git checkout master
 npm config set ca ""
-proxychains npm install
+npm install
 cp config/environments/development.js.example config/environments/development.js
 setsid node app.js development &
 popd
@@ -76,7 +76,7 @@ git clone git://github.com/CartoDB/Windshaft-cartodb.git
 pushd Windshaft-cartodb
 git checkout master
 npm config set ca ""
-proxychains npm install
+npm install
 cp config/environments/development.js.example config/environments/development.js
 setsid node app.js development &
 popd
@@ -98,7 +98,7 @@ pushd cartodb
 apt-get install imagemagick unp zip -y
 apt-get install ruby-dev -y
 RAILS_ENV=development bundle install
-proxychains npm install
+npm install
 sudo -u root bash << EOF
 apt-get install python-setuptools -y
 easy_install pip
