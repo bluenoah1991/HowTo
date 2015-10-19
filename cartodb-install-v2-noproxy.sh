@@ -43,7 +43,7 @@ cd /usr/local/src
 #
 #git clone https://github.com/CartoDB/cartodb-postgresql.git
 #pushd cartodb-postgresql
-#git checkout cdb
+#git checkout master
 #make all install
 #PGUSER=postgres make installcheck
 #popd
