@@ -7,3 +7,8 @@ not
 node debug xxx.js
 
 node debug /your/path/grunt taskName
+
+debug> repl
+> console.dir([Variables])
+not
+> [Variables]
