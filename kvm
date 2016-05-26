@@ -57,3 +57,6 @@ vim /etc/libvirt/qemu/trusty1404.xml
 virsh dumpxml trusty1404 > /etc/libvirt/qemu/trusty1404-2.xml
 
 virsh edit trusty1404 # !!!
+
+# Resize disk space  
+virsh vol-resize your_volume_name.img 100G --pool master_pool  
