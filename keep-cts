@@ -1,8 +1,0 @@
-# centos 6.* mount -t nfs
-yum install nfs-utils rpcbind
-
-# hostname
-/etc/sysconfig/network
-
-# 163 centos 6 yum source
-http://mirrors.163.com/.help/CentOS6-Base-163.repo

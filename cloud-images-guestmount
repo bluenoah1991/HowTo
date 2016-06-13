@@ -1,5 +1,0 @@
-guestmount -a abc.qcow2 -i --rw /mnt
-
-#  update
-
-umount /mnt

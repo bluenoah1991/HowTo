@@ -1,8 +1,0 @@
-cobbler
-openstack
-hadoop(hdfs,yarn)
-spark
-spark streaming
-zookeeper
-elasticsearch
-mongodb
