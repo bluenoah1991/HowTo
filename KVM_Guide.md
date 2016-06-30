@@ -91,3 +91,12 @@
 # Resize disk space  
 
 	virsh vol-resize your_volume_name.img 100G --pool master_pool  
+
+# Mount CD-ROM  
+
+	virsh attach-disk trusty1404 /your/path/xxx.iso hdc --type cdrom --mode readonly  
+
+> then  
+
+	virsh attach-disk trusty1404 " " hdc --type cdrom --mode readonly  
+	
