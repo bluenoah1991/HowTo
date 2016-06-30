@@ -98,5 +98,5 @@
 
 > then  
 
-	virsh attach-disk trusty1404 " " hdc --type cdrom --mode readonly  
+	virsh attach-disk trusty1404 "" hdc --type cdrom --mode readonly  
 	
