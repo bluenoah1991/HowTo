@@ -25,6 +25,10 @@ Tips: enter your os password
     gem install ruby-debug-ide  
     bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 1234 main.rb  
 
+you must configure "remoteHost" and "remoteWorkspaceRoot"  
+
+or
+
     gem 'pry'  
     gem 'pry-byebug'  
 
