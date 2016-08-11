@@ -16,6 +16,10 @@ Tips: enter your os password
     bundle config mirror.https://rubygems.org https://gems.ruby-china.org  
     bundle install  
 
+### Run  
+
+    bundle exec ruby main.rb  
+
 ### Remote Debug  
 
     gem install ruby-debug-ide  
