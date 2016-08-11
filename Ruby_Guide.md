@@ -23,7 +23,7 @@ Tips: enter your os password
 ### Remote Debug  
 
     gem install ruby-debug-ide  
-    bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 1234 main.rb  
+    bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 12345 main.rb  
 
 you must configure "remoteHost" and "remoteWorkspaceRoot"  
 
