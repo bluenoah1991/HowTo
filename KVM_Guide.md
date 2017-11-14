@@ -103,3 +103,7 @@
 # Static IP Address
 
 https://serverfault.com/questions/627238/kvm-libvirt-how-to-configure-static-guest-ip-addresses-on-the-virtualisation-ho
+
+# NAT Forward Port . 
+
+https://stackoverflow.com/questions/13772653/kvm-on-ubuntu-port-forwarding-to-a-guest-vm
