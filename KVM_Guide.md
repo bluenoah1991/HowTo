@@ -100,3 +100,6 @@
 
 	virsh attach-disk trusty1404 "" hdc --type cdrom --mode readonly  
 	
+# Static IP Address
+
+https://serverfault.com/questions/627238/kvm-libvirt-how-to-configure-static-guest-ip-addresses-on-the-virtualisation-ho
