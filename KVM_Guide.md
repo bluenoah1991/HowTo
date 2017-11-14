@@ -91,6 +91,7 @@
 # Resize disk space  
 
 	virsh vol-resize your_volume_name.img 100G --pool master_pool  
+	https://serverfault.com/questions/324281/how-do-you-increase-a-kvm-guests-disk-space  
 
 # Mount CD-ROM  
 
