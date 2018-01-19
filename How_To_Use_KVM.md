@@ -44,7 +44,8 @@
 
 > create pool  
 
-	virsh pool-create-as --name master_pool --type dir --target /virt/disks  
+	virsh pool-define-as --name master_pool --type dir --target /virt/disks  
+	virsh pool-autostart master_pool  
 
 > view pool info    
 
