@@ -34,6 +34,7 @@
 	virsh shutdown trusty1404 # Optional  
 	virsh destroy trusty1404  
 	virsh undefine trusty1404  
+	virsh vol-delete --pool master_pool trusty1404.img
 
 # Clone Virtual Machine  
   
