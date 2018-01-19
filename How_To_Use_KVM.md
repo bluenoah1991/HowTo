@@ -17,6 +17,15 @@
 	bridge_fd 0
 	bridge_maxwait 0
 
+> enable ip forward
+
+	/etc/sysctl.conf:
+	net.ipv4.ip_forward = 1
+	
+	sudo sysctl -p /etc/sysctl.conf
+	
+	sudo reboot
+
 # Install OS  
 
 	virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disks/trusty1404.img,format=qcow2,size=10 \  
