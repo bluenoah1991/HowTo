@@ -1,6 +1,21 @@
 # Install KVM  
 
 	apt-get install qemu-kvm libvirt-bin virtinst bridge-utils
+	
+> add bridging network card **br0**  
+
+	auto eth0
+	iface eth0 inet manual
+
+	auto br0
+	iface br0 inet static
+	address 172.17.0.100
+	netmask 255.255.0.0
+	gateway 172.17.0.1
+	bridge_ports eth0
+	bridge_stp off
+	bridge_fd 0
+	bridge_maxwait 0
 
 # Install OS  
 
