@@ -38,6 +38,12 @@
 	--network bridge:br0 --accelerate --graphics vnc,listen=0.0.0.0,port=5911 \  
 	--cdrom /virt/images/ubuntu-14.04.2-server-amd64.iso -d  
 
+> install windows 10
+
+	virt-install --name windows-10 --hvm --ram 32768 --vcpus 8 --os-type=windows --os-variant=win8.1 \
+	--disk path=/virt/disks/windows-10.img,format=qcow2,size=200 --network bridge:br0 --accelerate \
+	--graphics vnc,listen=0.0.0.0,port=5911 --cdrom /virt/images/Win10_1709_Chinese\(Simplified\)_x64.iso -d
+
 # Destroy Virtual Machine  
   
 	virsh shutdown trusty1404 # Optional  
