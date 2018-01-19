@@ -48,7 +48,3 @@ sed -i 's/^save/#&/' /etc/redis/${PORT}.conf
 /etc/init.d/redis_${PORT} start
 
 redis-cli ping
-
-echo "success!"
-
-
