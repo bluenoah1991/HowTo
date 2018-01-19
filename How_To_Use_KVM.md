@@ -42,7 +42,7 @@
 
 # Operate Pool   
 
-> create pool  
+> create pool (https://serverfault.com/questions/840519/how-to-change-the-default-storage-pool-from-libvirt/840520)  
 
 	virsh pool-define-as --name master_pool --type dir --target /virt/disks  
 	virsh pool-autostart master_pool  
