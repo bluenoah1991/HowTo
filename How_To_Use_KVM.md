@@ -68,30 +68,6 @@
 
 	virsh snapshot-revert trusty1404 snapshot1  
 
-# Configure Bridged Network
-
-> /etc/network/interface
-
-	auto eth0
-	iface eth0 inet manual
-
-	auto br0
-	iface br0 inet static
-	address ...
-	netmask ...
-	gateway ...
-	bridge_ports eth0
-	bridge_stp off
-	bridge_fd 0
-	bridge_maxwait 0
-
-	dns-nameservers ...
-
-> then  
-
-	reboot  
-	brctl show  
-
 # Random Mac Address
   
 	echo $RANDOM | md5sum | sed 's/\(..\)/&:/g' | cut -c1-17
