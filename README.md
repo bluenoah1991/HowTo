@@ -1,3 +1,3 @@
-# Scripts
+# HowTo
 
-Stuff related to deployment  
+How To XXX (๑•̀ㅂ•́)و✧
