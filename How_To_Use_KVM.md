@@ -48,16 +48,21 @@
 
 	apt-get install numactl
 	numactl -H
+	numastat
 	numastat -c qemu-system-x86
-	sudo virsh emulatorpin trusty1404
+	virsh emulatorpin trusty1404
 	
 > cpu tuning
+
+	virsh edit trusty1404
 
 	<cputune>
 		<vcpupin vcpu="0" cpuset="1-4,^2"/>
 		<vcpupin vcpu="1" cpuset="0,1"/>
 		<vcpupin vcpu="2" cpuset="2,3"/>
 	</cputune>
+	
+	virsh vcpuinfo trusty1404
 
 # Domain XML format
 
