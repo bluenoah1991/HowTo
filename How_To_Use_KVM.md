@@ -44,6 +44,25 @@
 	--disk path=/virt/disks/windows-10.img,format=qcow2,size=200 --network bridge:br0 --accelerate \
 	--graphics vnc,listen=0.0.0.0,port=5911 --cdrom /virt/images/Win10_1709_Chinese\(Simplified\)_x64.iso -d
 
+> processor affinities
+
+	apt-get install numactl
+	numactl -H
+	numastat -c qemu-system-x86
+	sudo virsh emulatorpin trusty1404
+	
+> cpu tuning
+
+	<cputune>
+		<vcpupin vcpu="0" cpuset="1-4,^2"/>
+		<vcpupin vcpu="1" cpuset="0,1"/>
+		<vcpupin vcpu="2" cpuset="2,3"/>
+	</cputune>
+
+# Domain XML format
+
+[https://libvirt.org/formatdomain.html](https://libvirt.org/formatdomain.html)  
+
 # Destroy Virtual Machine  
   
 	virsh shutdown trusty1404 # Optional  
