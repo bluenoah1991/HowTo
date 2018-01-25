@@ -25,6 +25,12 @@
 
     root = administrator
 
+# Windows 10 启用访问
+
+> gpedit.msc  
+
+> 计算机配置 - 管理模板 - 网络 - Lanman工作站 - 启用不安全的来宾登录  
+
 # Windows credentials manage  
 
     net use /delete \\yourhost\dirname  
