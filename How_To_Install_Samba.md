@@ -21,6 +21,10 @@
     sudo smbpasswd -a createYourUser # Create user  
     sudo smbpasswd yourUserName # Modify password  
 
+# /etc/samba/smbusers
+
+    root = administrator
+
 # Windows credentials manage  
 
     net use /delete \\yourhost\dirname  
