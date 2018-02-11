@@ -79,6 +79,16 @@
   
 	virt-clone --original=trusty1404 --name=clone0 --file=/virt/disks/clone0.img
 
+# Offline migrating KVM guests
+
+	scp /virt/disks/trusty1404.img ubuntu:1.2.3.4:/virt/disks
+	virsh dumpxml trusty1404 > trusty1404.xml
+	scp trusty1404.xml ubuntu:1.2.3.4:/home/ubuntu
+	
+> log in to 1.2.3.4
+
+	virsh define trusty1404.xml
+
 # Operate Pool   
 
 > create pool (https://serverfault.com/questions/840519/how-to-change-the-default-storage-pool-from-libvirt/840520)  
