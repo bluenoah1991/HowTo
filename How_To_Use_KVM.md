@@ -81,7 +81,7 @@
 
 # Offline migrating KVM guests
 
-	scp /virt/disks/trusty1404.img ubuntu:1.2.3.4:/virt/disks
+	scp /virt/disks/trusty1404.img ubuntu@1.2.3.4:/virt/disks
 	virsh dumpxml trusty1404 > trusty1404.xml
 	scp trusty1404.xml ubuntu:1.2.3.4:/home/ubuntu
 	
