@@ -1,24 +1,35 @@
 #!/bin/bash
 
-IpAddress=0.0.0.0
-Password=123456
+IPADDRESS=0.0.0.0
+PASSWORD=123456
 
+# install shadowsocks server
+if [ ! -e /usr/local/bin/ssserver ]; then
+apt-get update
 apt-get install python-pip -y
 pip install shadowsocks
+fi
 
-echo -e "
-{
-    \"server\":\"${IpAddress}\",
+# create shadowsocks config file
+if [ ! -e /etc/shadowsocks.json ]; then
+echo -e "{
+    \"server\":\"${IPADDRESS}\",
     \"server_port\":8388,
     \"local_address\": \"127.0.0.1\",
     \"local_port\":1080,
-    \"password\":\"${Password}\",
+    \"password\":\"${PASSWORD}\",
     \"timeout\":300,
     \"method\":\"aes-256-cfb\",
     \"fast_open\": false
-}
-" > /etc/shadowsocks.json
+}" > /etc/shadowsocks.json
+fi
 
-ssserver -c /etc/shadowsocks.json -d start
+# configure to automatically start up at boot
+if ! grep -q ssserver /etc/rc.local; then
+sed -i '/^exit\ 0/i\/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start\n' /etc/rc.local
+fi
 
-echo "Success!"
+# start server
+/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start
+
+echo "installation succeeded!"
