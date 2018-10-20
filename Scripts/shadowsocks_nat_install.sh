@@ -16,6 +16,9 @@ chmod 755 /usr/bin/ss-nat
 
 # Load kmod xt_TPROXY
 modprobe xt_TPROXY
+if ! grep -q xt_TPROXY /etc/rc.local; then
+	sed -i "/^exit\ 0/i/sbin/modprobe xt_TPROXY\n" /etc/rc.local
+fi
 
 # Enable IPv4 forward
 sed -i '/^#net.ipv4.ip_forward=1/s/^#//' /etc/sysctl.conf
@@ -41,7 +44,7 @@ echo -e "
 if [ ! -e /var/run/ss-redir.pid ]; then
 	CMD="/usr/bin/ss-redir -u -c ${CONFIG_PATH} -f /var/run/ss-redir.pid"
 	if ! grep -q ss-redir /etc/rc.local; then
-		sed -i "/^exit\ 0/i\\${CMD}\n" /etc/rc.local
+		sed -i "/^exit\ 0/i${CMD}\n" /etc/rc.local
 	fi
 	eval ${CMD}
 fi
@@ -51,3 +54,13 @@ fi
 # Enable NAT rules for shadowsocks
 # https://github.com/shadowsocks/shadowsocks-libev/blob/master/doc/ss-nat.asciidoc
 /usr/bin/ss-nat -s ${REMOTE_SERVER_IP} -l 1080 -I ${LAN_INTERFACE_NAME} -u -o
+
+# Persistent IPTABLES rules and IPSET rules
+iptables-save > /etc/iptables.rules
+ipset --save > /etc/ipset.rules
+if ! grep -q ipset\ restore /etc/rc.local; then
+	sed -i "/^exit\ 0/i/sbin/ipset restore < /etc/ipset.rules\n" /etc/rc.local
+fi
+if ! grep -q iptables-restore /etc/rc.local; then
+	sed -i "/^\/sbin\/ipset/a/sbin/iptables-restore < /etc/iptables.rules\n" /etc/rc.local
+fi
