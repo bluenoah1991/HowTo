@@ -42,25 +42,22 @@ echo -e "
 
 # Enable ss-redir service
 if [ ! -e /var/run/ss-redir.pid ]; then
-	CMD="/usr/bin/ss-redir -u -c ${CONFIG_PATH} -f /var/run/ss-redir.pid"
+	SS_REDIR_COMMAND="/usr/bin/ss-redir -u -c ${CONFIG_PATH} -f /var/run/ss-redir.pid"
 	if ! grep -q ss-redir /etc/rc.local; then
-		sed -i "/^exit\ 0/i${CMD}\n" /etc/rc.local
+		sed -i "/^exit\ 0/i${SS_REDIR_COMMAND}\n" /etc/rc.local
 	fi
-	eval ${CMD}
+	eval ${SS_REDIR_COMMAND}
 fi
 
 # Disable and flush all NAT rules for shadowsocks
 /usr/bin/ss-nat -f
 # Enable NAT rules for shadowsocks
 # https://github.com/shadowsocks/shadowsocks-libev/blob/master/doc/ss-nat.asciidoc
-/usr/bin/ss-nat -s ${REMOTE_SERVER_IP} -l 1080 -I ${LAN_INTERFACE_NAME} -u -o
+SS_NAT_COMMAND="/usr/bin/ss-nat -s ${REMOTE_SERVER_IP} -l 1080 -I ${LAN_INTERFACE_NAME} -u -o"
 
 # Persistent IPTABLES rules and IPSET rules
-iptables-save > /etc/iptables.rules
-ipset --save > /etc/ipset.rules
-if ! grep -q ipset\ restore /etc/rc.local; then
-	sed -i "/^exit\ 0/i/sbin/ipset restore < /etc/ipset.rules\n" /etc/rc.local
+if ! grep -q ss-nat /etc/rc.local; then
+	sed -i "/^exit\ 0/i${SS_NAT_COMMAND}\n" /etc/rc.local
 fi
-if ! grep -q iptables-restore /etc/rc.local; then
-	sed -i "/^\/sbin\/ipset/a/sbin/iptables-restore < /etc/iptables.rules\n" /etc/rc.local
-fi
+
+eval ${SS_NAT_COMMAND}
