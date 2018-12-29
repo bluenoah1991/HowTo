@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# export LC_ALL="en_US.UTF-8"
+# export LC_CTYPE="en_US.UTF-8"
+# sudo dpkg-reconfigure locales
+
 IPADDRESS=0.0.0.0
 PASSWORD=123456
 
