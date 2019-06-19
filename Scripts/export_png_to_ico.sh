@@ -16,8 +16,8 @@ for fullname in $1/*.png; do
     filename=${fullname##*/}
     basename=${filename%.*}
     for size in "${size_array[@]}"; do
-        convert $fullname -resize ${size}x${size} resized/$basename-$size.png
+        convert "$fullname" -resize ${size}x${size} "resized/$basename-$size.png"
     done
-    convert resized/${basename}-{256,48,32,16}.png converted/${basename}.ico
+    convert resized/"${basename}"-{256,48,32,16}.png "converted/${basename}.ico"
     echo "Exporting icon '$basename' as '$basename.ico'(256,48,32,16 pixels)"
 done
