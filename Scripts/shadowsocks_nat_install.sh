@@ -35,7 +35,7 @@ echo -e "
     \"local_port\": 1080,
     \"password\": \"${REMOTE_SERVER_PASSWORD}\",
     \"timeout\": 300,
-    \"method\": \"aes-256-cfb\",
+    \"method\": \"aes-256-gcm\",
     \"fast_open\": false
 }
 " > ${CONFIG_PATH}
