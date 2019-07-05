@@ -23,7 +23,7 @@ echo -e "{
     \"local_port\":1080,
     \"password\":\"${PASSWORD}\",
     \"timeout\":300,
-    \"method\":\"aes-256-cfb\",
+    \"method\":\"aes-256-gcm\",
     \"fast_open\": false
 }" > /etc/shadowsocks.json
 fi
