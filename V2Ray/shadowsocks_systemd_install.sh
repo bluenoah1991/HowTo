@@ -24,7 +24,7 @@ if [ ! -e /etc/shadowsocks.json ]; then
 echo -e "{
     \"server\": \"${ADDRESS}\",
     \"server_port\": ${PORT},
-    \"local_address\": \"127.0.0.1\",
+    \"local_address\": \"0.0.0.0\",
     \"local_port\": 1080,
     \"password\": \"${PASSWORD}\",
     \"timeout\": 300,
