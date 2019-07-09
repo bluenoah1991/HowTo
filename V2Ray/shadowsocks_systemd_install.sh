@@ -31,7 +31,7 @@ echo -e "{
     \"method\": \"aes-256-gcm\",
     \"fast_open\": false,
     \"plugin\": \"${V2RAYPLUGIN}\",
-    \"plugin-opts\": \"server;tls;cert=/root/server.crt;key=/root/server.key\"
+    \"plugin_opts\": \"server;tls;cert=/root/server.crt;key=/root/server.key\"
 }" > /etc/shadowsocks.json
 
 echo -e "{
@@ -44,7 +44,7 @@ echo -e "{
     \"method\": \"aes-256-gcm\",
     \"fast_open\": false,
     \"plugin\": \"${V2RAYPLUGIN}\",
-    \"plugin-opts\": \"tls;host=${DOMAIN};cert=/root/server.crt\"
+    \"plugin_opts\": \"tls;host=${DOMAIN};cert=/root/server.crt\"
 }" > /etc/shadowsocks-client.json
 fi
 
