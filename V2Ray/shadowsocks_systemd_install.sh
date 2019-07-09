@@ -33,6 +33,19 @@ echo -e "{
     \"plugin\": \"${V2RAYPLUGIN}\",
     \"plugin-opts\": \"server;tls;cert=/root/server.crt;key=/root/server.key\"
 }" > /etc/shadowsocks.json
+
+echo -e "{
+    \"server\": \"${ADDRESS}\",
+    \"server_port\": ${PORT},
+    \"local_address\": \"0.0.0.0\",
+    \"local_port\": 1080,
+    \"password\": \"${PASSWORD}\",
+    \"timeout\": 300,
+    \"method\": \"aes-256-gcm\",
+    \"fast_open\": false,
+    \"plugin\": \"${V2RAYPLUGIN}\",
+    \"plugin-opts\": \"tls;host=${DOMAIN};cert=/root/server.crt\"
+}" > /etc/shadowsocks-client.json
 fi
 
 # generate certificate
