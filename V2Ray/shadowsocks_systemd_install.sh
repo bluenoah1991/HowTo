@@ -64,7 +64,7 @@ fi
 # configure to automatically start up at boot
 if [ -e /etc/rc.local ]; then
 if ! grep -q ssserver /etc/rc.local; then
-COMMAND="/usr/bin/ss-server -c /etc/shadowsocks.json"
+COMMAND="/usr/bin/ss-server -c /etc/shadowsocks.json 2>&1 &"
 sed -i "/^exit\\ 0/i\\${COMMAND}\\n" /etc/rc.local
 # start server
 ${COMMAND}
