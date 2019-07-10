@@ -1,0 +1,14 @@
+[Unit]
+Description=shadowsocks server
+After=network.target auditd.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/ss-server -c /etc/shadowsocks.json 2>&1 &
+ExecStop=/bin/echo 0
+PIDFile=/var/run/shadowsocks-v2ray.pid
+Restart=always
+RestartSec=4
+
+[Install]
+WantedBy=multi-user.target
