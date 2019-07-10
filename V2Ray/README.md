@@ -32,3 +32,7 @@ Build docker images
 Run docker
 
 	C:\src\ss-local>docker run -p 1080:1080 -p 8118:8118 --name container_name image_name
+
+Requirement shadowsocks-libev 3.2.5+
+
+> https://github.com/shadowsocks/v2ray-plugin/issues/29#issuecomment-468924920
