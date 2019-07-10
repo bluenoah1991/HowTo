@@ -4,8 +4,7 @@ After=network.target auditd.service
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/ss-server -c /etc/shadowsocks.json -f /var/run/shadowsocks-v2ray.pid 2>&1 &
-ExecStop=/bin/kill -9 $(/bin/cat /var/run/shadowsocks-v2ray.pid) && /bin/rm -f /var/run/shadowsocks-v2ray.pid
+ExecStart=/usr/bin/ss-server -c /etc/shadowsocks.json -f /var/run/shadowsocks-v2ray.pid
 PIDFile=/var/run/shadowsocks-v2ray.pid
 Restart=always
 RestartSec=4
