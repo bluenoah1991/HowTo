@@ -51,7 +51,7 @@ fi
 # generate certificate
 if [ ! -e /root/server.crt ]; then
 apt-get install openssl -y
-openssl req -nodes -new -x509 -keyout /root/server.key -out /root/server.crt -subj "${SUBJECT}"
+openssl req -nodes -new -x509 -days 3650 -keyout /root/server.key -out /root/server.crt -subj "${SUBJECT}"
 fi
 
 # download v2ray plugin
